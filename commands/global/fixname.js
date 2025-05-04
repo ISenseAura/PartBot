@@ -4,6 +4,6 @@ module.exports = {
 	permissions: 'beta',
 	commandFunction: function (Bot, room, time, by, args, client) {
 		Bot.say(room, `My name is now ${Bot.status.nickName = config.nickName}!`);
-		// This is gonna be awkward in the public repo
+		Bot.say(room, `/status ${config.status || 'Say \'PartBot?\' for help.'}`);
 	}
 };

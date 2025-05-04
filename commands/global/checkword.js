@@ -7,7 +7,8 @@ module.exports = {
 		const [word, dict, mod] = args.join('').split(',');
 		let memeOverride = false;
 		if (room === 'boardgames' && toID(word) === 'plisaweeb') memeOverride = true;
-		const text = `${toID(word).toUpperCase()} is ${memeOverride || WORDS.checkWord(word, dict, mod) ? '' : 'not '} a Scrabble-legal word.`;
+		const displayWord = toID(word).toUpperCase();
+		const text = `${displayWord} is ${memeOverride || WORDS.checkWord(word, dict, mod || 'pokemon') ? '' : 'not '} a Scrabble-legal word.`;
 		if (tools.hasPermission(by, 'gamma', room)) Bot.say(room, text);
 		else Bot.roomReply(room, by, text);
 	}

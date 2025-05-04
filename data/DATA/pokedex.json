@@ -299,7 +299,7 @@
 			"Charizard-Mega-Y"
 		],
 		"canGigantamax": "G-Max Wildfire",
-		"tier": "RU"
+		"tier": "PU"
 	},
 	"charizardmegax": {
 		"num": 6,
@@ -1342,7 +1342,7 @@
 			"Pikachu-Cosplay"
 		],
 		"canGigantamax": "G-Max Volt Crash",
-		"tier": "NFE"
+		"tier": "(PU)"
 	},
 	"pikachucosplay": {
 		"num": 25,
@@ -1557,8 +1557,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachuhoenn": {
 		"num": 25,
@@ -1588,8 +1587,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachusinnoh": {
 		"num": 25,
@@ -1619,8 +1617,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachuunova": {
 		"num": 25,
@@ -1650,8 +1647,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachukalos": {
 		"num": 25,
@@ -1681,8 +1677,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachualola": {
 		"num": 25,
@@ -1712,8 +1707,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachupartner": {
 		"num": 25,
@@ -1743,8 +1737,7 @@
 			"Undiscovered"
 		],
 		"gen": 7,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"pikachustarter": {
 		"num": 25,
@@ -1834,8 +1827,7 @@
 			"Undiscovered"
 		],
 		"gen": 8,
-		"tier": "Illegal",
-		"isNonstandard": "Past"
+		"tier": "(PU)"
 	},
 	"raichu": {
 		"num": 26,
@@ -1905,8 +1897,7 @@
 			"Field",
 			"Fairy"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"sandshrew": {
 		"num": 27,
@@ -2546,7 +2537,7 @@
 		"eggGroups": [
 			"Fairy"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"zubat": {
 		"num": 41,
@@ -2869,7 +2860,7 @@
 			"Diglett",
 			"Diglett-Alola"
 		],
-		"tier": "LC"
+		"tier": "NFE"
 	},
 	"diglettalola": {
 		"num": 50,
@@ -2902,8 +2893,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"dugtrio": {
 		"num": 51,
@@ -2971,8 +2961,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"meowth": {
 		"num": 52,
@@ -3044,8 +3033,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"meowthgalar": {
 		"num": 52,
@@ -3144,7 +3132,7 @@
 			"Persian",
 			"Persian-Alola"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"persianalola": {
 		"num": 53,
@@ -3175,8 +3163,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"psyduck": {
 		"num": 54,
@@ -3237,7 +3224,7 @@
 			"Water 1",
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"mankey": {
 		"num": 56,
@@ -3377,8 +3364,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"arcanine": {
 		"num": 59,
@@ -3456,8 +3442,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"poliwag": {
 		"num": 60,
@@ -4436,8 +4421,7 @@
 			"Monster",
 			"Water 1"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"slowbro": {
 		"num": 80,
@@ -4542,8 +4526,7 @@
 			"Monster",
 			"Water 1"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"magnemite": {
 		"num": 81,
@@ -4609,7 +4592,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "NFE"
+		"tier": "NU"
 	},
 	"farfetchd": {
 		"num": 83,
@@ -4669,7 +4652,7 @@
 			"H": "Scrappy"
 		},
 		"heightm": 0.8,
-		"weightkg": 15,
+		"weightkg": 42,
 		"color": "Brown",
 		"evos": [
 			"Sirfetch’d"
@@ -4876,8 +4859,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"muk": {
 		"num": 89,
@@ -4945,8 +4927,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"shellder": {
 		"num": 90,
@@ -5067,7 +5048,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"gengar": {
 		"num": 94,
@@ -5254,7 +5235,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"krabby": {
 		"num": 98,
@@ -5419,8 +5400,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"electrode": {
 		"num": 101,
@@ -5491,8 +5471,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"exeggcute": {
 		"num": 102,
@@ -6033,7 +6012,7 @@
 			"Fairy"
 		],
 		"canHatch": true,
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"tangela": {
 		"num": 114,
@@ -6641,8 +6620,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"taurospaldeacombat": {
 		"num": 128,
@@ -6667,7 +6645,7 @@
 			"H": "Cud Chew"
 		},
 		"heightm": 1.4,
-		"weightkg": 88.4,
+		"weightkg": 115,
 		"color": "Black",
 		"eggGroups": [
 			"Field"
@@ -6698,7 +6676,7 @@
 			"H": "Cud Chew"
 		},
 		"heightm": 1.4,
-		"weightkg": 88.4,
+		"weightkg": 85,
 		"color": "Black",
 		"eggGroups": [
 			"Field"
@@ -6729,7 +6707,7 @@
 			"H": "Cud Chew"
 		},
 		"heightm": 1.4,
-		"weightkg": 88.4,
+		"weightkg": 110,
 		"color": "Black",
 		"eggGroups": [
 			"Field"
@@ -6801,7 +6779,7 @@
 			"Gyarados",
 			"Gyarados-Mega"
 		],
-		"tier": "UU"
+		"tier": "RUBL"
 	},
 	"gyaradosmega": {
 		"num": 130,
@@ -6923,7 +6901,7 @@
 		"eggGroups": [
 			"Ditto"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"eevee": {
 		"num": 133,
@@ -7074,7 +7052,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "RU"
 	},
 	"jolteon": {
 		"num": 135,
@@ -7107,7 +7085,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "NUBL"
 	},
 	"flareon": {
 		"num": 136,
@@ -7140,7 +7118,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"porygon": {
 		"num": 137,
@@ -7501,8 +7479,7 @@
 			"Articuno",
 			"Articuno-Galar"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"articunogalar": {
 		"num": 144,
@@ -7531,8 +7508,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"zapdos": {
 		"num": 145,
@@ -7570,8 +7546,7 @@
 			"Zapdos",
 			"Zapdos-Galar"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"zapdosgalar": {
 		"num": 145,
@@ -7600,8 +7575,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"moltres": {
 		"num": 146,
@@ -7639,8 +7613,7 @@
 			"Moltres",
 			"Moltres-Galar"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"moltresgalar": {
 		"num": 146,
@@ -7669,8 +7642,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"dratini": {
 		"num": 147,
@@ -7801,8 +7773,7 @@
 			"Mewtwo-Mega-X",
 			"Mewtwo-Mega-Y"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"mewtwomegax": {
 		"num": 150,
@@ -7892,8 +7863,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RUBL"
 	},
 	"chikorita": {
 		"num": 152,
@@ -8032,8 +8002,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"quilava": {
 		"num": 156,
@@ -8069,8 +8038,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"typhlosion": {
 		"num": 157,
@@ -8109,8 +8077,7 @@
 			"Typhlosion",
 			"Typhlosion-Hisui"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"typhlosionhisui": {
 		"num": 157,
@@ -8145,8 +8112,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"totodile": {
 		"num": 158,
@@ -9127,7 +9093,7 @@
 			"Mineral"
 		],
 		"canHatch": true,
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"politoed": {
 		"num": 186,
@@ -9255,7 +9221,7 @@
 			"Fairy",
 			"Grass"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"aipom": {
 		"num": 190,
@@ -9346,7 +9312,7 @@
 		"eggGroups": [
 			"Grass"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"yanma": {
 		"num": 193,
@@ -9442,7 +9408,7 @@
 			"H": "Unaware"
 		},
 		"heightm": 0.4,
-		"weightkg": 8.5,
+		"weightkg": 11,
 		"color": "Brown",
 		"evos": [
 			"Clodsire"
@@ -9515,7 +9481,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"umbreon": {
 		"num": 197,
@@ -9652,8 +9618,7 @@
 			"Monster",
 			"Water 1"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"misdreavus": {
 		"num": 200,
@@ -9681,7 +9646,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"unown": {
 		"num": 201,
@@ -9887,7 +9852,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"dunsparce": {
 		"num": 206,
@@ -9918,7 +9883,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"gligar": {
 		"num": 207,
@@ -10158,8 +10123,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"scizor": {
 		"num": 212,
@@ -10392,8 +10356,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"teddiursa": {
 		"num": 216,
@@ -10753,7 +10716,7 @@
 			"Water 1",
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"mantine": {
 		"num": 226,
@@ -11068,7 +11031,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "NFE"
 	},
 	"smeargle": {
 		"num": 235,
@@ -11326,7 +11289,7 @@
 		"eggGroups": [
 			"Fairy"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"raikou": {
 		"num": 243,
@@ -11516,7 +11479,7 @@
 			"Tyranitar",
 			"Tyranitar-Mega"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"tyranitarmega": {
 		"num": 248,
@@ -12965,7 +12928,7 @@
 			"Water 1",
 			"Bug"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"shroomish": {
 		"num": 285,
@@ -13027,7 +12990,7 @@
 			"Fairy",
 			"Grass"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"slakoth": {
 		"num": 287,
@@ -13112,7 +13075,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"nincada": {
 		"num": 290,
@@ -13366,7 +13329,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "RUBL"
+		"tier": "RU"
 	},
 	"azurill": {
 		"num": 298,
@@ -13540,7 +13503,7 @@
 			"Sableye",
 			"Sableye-Mega"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"sableyemega": {
 		"num": 302,
@@ -14174,7 +14137,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"carvanha": {
 		"num": 318,
@@ -14460,7 +14423,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "OU"
+		"tier": "RU"
 	},
 	"spoink": {
 		"num": 325,
@@ -14519,7 +14482,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"spinda": {
 		"num": 327,
@@ -14703,7 +14666,7 @@
 			"Grass",
 			"Human-Like"
 		],
-		"tier": "PU"
+		"tier": "NU"
 	},
 	"swablu": {
 		"num": 333,
@@ -14828,7 +14791,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"seviper": {
 		"num": 336,
@@ -14855,7 +14818,7 @@
 			"Field",
 			"Dragon"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"lunatone": {
 		"num": 337,
@@ -14972,7 +14935,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"corphish": {
 		"num": 341,
@@ -15520,7 +15483,7 @@
 			"Banette",
 			"Banette-Mega"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"banettemega": {
 		"num": 354,
@@ -15640,7 +15603,7 @@
 			"Monster",
 			"Grass"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"chimecho": {
 		"num": 358,
@@ -15834,7 +15797,7 @@
 			"Glalie",
 			"Glalie-Mega"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"glaliemega": {
 		"num": 362,
@@ -16119,7 +16082,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"bagon": {
 		"num": 371,
@@ -16647,8 +16610,7 @@
 			"Kyogre",
 			"Kyogre-Primal"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"kyogreprimal": {
 		"num": 382,
@@ -16714,8 +16676,7 @@
 			"Groudon",
 			"Groudon-Primal"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"groudonprimal": {
 		"num": 383,
@@ -16783,8 +16744,7 @@
 			"Rayquaza",
 			"Rayquaza-Mega"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"rayquazamega": {
 		"num": 384,
@@ -17391,7 +17351,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"bidoof": {
 		"num": 399,
@@ -17512,7 +17472,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"shinx": {
 		"num": 403,
@@ -18050,7 +18010,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "NU"
+		"tier": "(PU)"
 	},
 	"pachirisu": {
 		"num": 417,
@@ -18078,7 +18038,7 @@
 			"Field",
 			"Fairy"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"buizel": {
 		"num": 418,
@@ -18137,7 +18097,7 @@
 			"Water 1",
 			"Field"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"cherubi": {
 		"num": 420,
@@ -18564,7 +18524,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"glameow": {
 		"num": 431,
@@ -18940,7 +18900,7 @@
 		"eggGroups": [
 			"Amorphous"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"gible": {
 		"num": 443,
@@ -19004,7 +18964,7 @@
 			"Monster",
 			"Dragon"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"garchomp": {
 		"num": 445,
@@ -19186,7 +19146,7 @@
 			"Lucario",
 			"Lucario-Mega"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"lucariomega": {
 		"num": 448,
@@ -19489,7 +19449,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"mantyke": {
 		"num": 458,
@@ -19982,7 +19942,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"gliscor": {
 		"num": 472,
@@ -20119,7 +20079,7 @@
 			"Gallade",
 			"Gallade-Mega"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"gallademega": {
 		"num": 475,
@@ -20244,7 +20204,7 @@
 			"Fairy",
 			"Mineral"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"rotom": {
 		"num": 479,
@@ -20465,8 +20425,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"mesprit": {
 		"num": 481,
@@ -20495,8 +20454,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"azelf": {
 		"num": 482,
@@ -20525,8 +20483,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"dialga": {
 		"num": 483,
@@ -20564,8 +20521,7 @@
 			"Dialga",
 			"Dialga-Origin"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"dialgaorigin": {
 		"num": 483,
@@ -20598,8 +20554,7 @@
 		"requiredItem": "Adamant Crystal",
 		"changesFrom": "Dialga",
 		"gen": 8,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"palkia": {
 		"num": 484,
@@ -20637,8 +20592,7 @@
 			"Palkia",
 			"Palkia-Origin"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"palkiaorigin": {
 		"num": 484,
@@ -20671,8 +20625,7 @@
 		"requiredItem": "Lustrous Globe",
 		"changesFrom": "Palkia",
 		"gen": 8,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"heatran": {
 		"num": 485,
@@ -20702,8 +20655,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"regigigas": {
 		"num": 486,
@@ -20772,8 +20724,7 @@
 			"Giratina",
 			"Giratina-Origin"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"giratinaorigin": {
 		"num": 487,
@@ -20804,8 +20755,7 @@
 		],
 		"requiredItem": "Griseous Core",
 		"changesFrom": "Giratina",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"cresselia": {
 		"num": 488,
@@ -20834,8 +20784,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"phione": {
 		"num": 489,
@@ -21065,8 +21014,7 @@
 			"Arceus-Dark",
 			"Arceus-Fairy"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"arceusbug": {
 		"num": 493,
@@ -21098,8 +21046,7 @@
 			"Insect Plate",
 			"Buginium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusdark": {
 		"num": 493,
@@ -21131,8 +21078,7 @@
 			"Dread Plate",
 			"Darkinium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusdragon": {
 		"num": 493,
@@ -21164,8 +21110,7 @@
 			"Draco Plate",
 			"Dragonium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceuselectric": {
 		"num": 493,
@@ -21197,8 +21142,7 @@
 			"Zap Plate",
 			"Electrium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusfairy": {
 		"num": 493,
@@ -21231,8 +21175,7 @@
 			"Fairium Z"
 		],
 		"changesFrom": "Arceus",
-		"gen": 6,
-		"isNonstandard": "Unobtainable"
+		"gen": 6
 	},
 	"arceusfighting": {
 		"num": 493,
@@ -21264,8 +21207,7 @@
 			"Fist Plate",
 			"Fightinium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusfire": {
 		"num": 493,
@@ -21297,8 +21239,7 @@
 			"Flame Plate",
 			"Firium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusflying": {
 		"num": 493,
@@ -21330,8 +21271,7 @@
 			"Sky Plate",
 			"Flyinium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusghost": {
 		"num": 493,
@@ -21363,8 +21303,7 @@
 			"Spooky Plate",
 			"Ghostium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusgrass": {
 		"num": 493,
@@ -21396,8 +21335,7 @@
 			"Meadow Plate",
 			"Grassium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusground": {
 		"num": 493,
@@ -21429,8 +21367,7 @@
 			"Earth Plate",
 			"Groundium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusice": {
 		"num": 493,
@@ -21462,8 +21399,7 @@
 			"Icicle Plate",
 			"Icium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceuspoison": {
 		"num": 493,
@@ -21495,8 +21431,7 @@
 			"Toxic Plate",
 			"Poisonium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceuspsychic": {
 		"num": 493,
@@ -21528,8 +21463,7 @@
 			"Mind Plate",
 			"Psychium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceusrock": {
 		"num": 493,
@@ -21561,8 +21495,7 @@
 			"Stone Plate",
 			"Rockium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceussteel": {
 		"num": 493,
@@ -21594,8 +21527,7 @@
 			"Iron Plate",
 			"Steelium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"arceuswater": {
 		"num": 493,
@@ -21627,8 +21559,7 @@
 			"Splash Plate",
 			"Waterium Z"
 		],
-		"changesFrom": "Arceus",
-		"isNonstandard": "Unobtainable"
+		"changesFrom": "Arceus"
 	},
 	"victini": {
 		"num": 494,
@@ -21903,8 +21834,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"dewott": {
 		"num": 502,
@@ -21940,8 +21870,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"samurott": {
 		"num": 503,
@@ -21980,8 +21909,7 @@
 			"Samurott",
 			"Samurott-Hisui"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"samurotthisui": {
 		"num": 503,
@@ -22016,8 +21944,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"patrat": {
 		"num": 504,
@@ -23533,7 +23460,7 @@
 			"Lilligant",
 			"Lilligant-Hisui"
 		],
-		"tier": "PU"
+		"tier": "PUBL"
 	},
 	"lilliganthisui": {
 		"num": 549,
@@ -23567,8 +23494,7 @@
 		"eggGroups": [
 			"Grass"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UUBL"
 	},
 	"basculin": {
 		"num": 550,
@@ -23605,7 +23531,7 @@
 			"Basculin-Blue-Striped",
 			"Basculin-White-Striped"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"basculinbluestriped": {
 		"num": 550,
@@ -23634,7 +23560,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"basculinwhitestriped": {
 		"num": 550,
@@ -23668,8 +23594,7 @@
 			"Water 2"
 		],
 		"gen": 8,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"sandile": {
 		"num": 551,
@@ -24598,7 +24523,7 @@
 			"Zoroark",
 			"Zoroark-Hisui"
 		],
-		"tier": "NU"
+		"tier": "NUBL"
 	},
 	"zoroarkhisui": {
 		"num": 571,
@@ -24632,7 +24557,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"minccino": {
 		"num": 572,
@@ -24805,7 +24730,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"solosis": {
 		"num": 577,
@@ -25945,7 +25870,7 @@
 			"Monster",
 			"Dragon"
 		],
-		"tier": "RUBL"
+		"tier": "UU"
 	},
 	"cubchoo": {
 		"num": 613,
@@ -26004,7 +25929,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"cryogonal": {
 		"num": 615,
@@ -26030,7 +25955,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"shelmet": {
 		"num": 616,
@@ -26380,7 +26305,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"bouffalant": {
 		"num": 626,
@@ -26512,8 +26437,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"vullaby": {
 		"num": 629,
@@ -26723,7 +26647,7 @@
 		"eggGroups": [
 			"Dragon"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"larvesta": {
 		"num": 636,
@@ -26782,7 +26706,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "OU"
+		"tier": "Uber"
 	},
 	"cobalion": {
 		"num": 638,
@@ -26913,8 +26837,7 @@
 			"Tornadus",
 			"Tornadus-Therian"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"tornadustherian": {
 		"num": 641,
@@ -26943,8 +26866,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Tornadus",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"thundurus": {
 		"num": 642,
@@ -26983,8 +26905,7 @@
 			"Thundurus",
 			"Thundurus-Therian"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"thundurustherian": {
 		"num": 642,
@@ -27014,8 +26935,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Thundurus",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"reshiram": {
 		"num": 643,
@@ -27116,8 +27036,7 @@
 			"Landorus",
 			"Landorus-Therian"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"landorustherian": {
 		"num": 645,
@@ -27147,8 +27066,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Landorus",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"kyurem": {
 		"num": 646,
@@ -27358,8 +27276,7 @@
 			"Meloetta",
 			"Meloetta-Pirouette"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"meloettapirouette": {
 		"num": 648,
@@ -27389,8 +27306,7 @@
 			"Undiscovered"
 		],
 		"requiredMove": "Relic Song",
-		"battleOnly": "Meloetta",
-		"isNonstandard": "Unobtainable"
+		"battleOnly": "Meloetta"
 	},
 	"genesect": {
 		"num": 649,
@@ -27595,8 +27511,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"quilladin": {
 		"num": 651,
@@ -27631,8 +27546,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"chesnaught": {
 		"num": 652,
@@ -27665,8 +27579,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"fennekin": {
 		"num": 653,
@@ -27699,8 +27612,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"braixen": {
 		"num": 654,
@@ -27735,8 +27647,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"delphox": {
 		"num": 655,
@@ -27769,8 +27680,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"froakie": {
 		"num": 656,
@@ -27873,14 +27783,44 @@
 			"Water 1"
 		],
 		"otherFormes": [
+			"Greninja-Bond",
 			"Greninja-Ash"
 		],
 		"formeOrder": [
 			"Greninja",
-			"Greninja",
+			"Greninja-Bond",
 			"Greninja-Ash"
 		],
 		"tier": "OU"
+	},
+	"greninjabond": {
+		"num": 658,
+		"name": "Greninja-Bond",
+		"baseSpecies": "Greninja",
+		"forme": "Bond",
+		"types": [
+			"Water",
+			"Dark"
+		],
+		"gender": "M",
+		"baseStats": {
+			"hp": 72,
+			"atk": 95,
+			"def": 67,
+			"spa": 103,
+			"spd": 71,
+			"spe": 122
+		},
+		"abilities": {
+			"0": "Battle Bond"
+		},
+		"heightm": 1.5,
+		"weightkg": 40,
+		"color": "Blue",
+		"eggGroups": [
+			"Undiscovered"
+		],
+		"gen": 7
 	},
 	"greninjaash": {
 		"num": 658,
@@ -27910,7 +27850,7 @@
 			"Undiscovered"
 		],
 		"requiredAbility": "Battle Bond",
-		"battleOnly": "Greninja",
+		"battleOnly": "Greninja-Bond",
 		"gen": 7,
 		"tier": "Illegal",
 		"isNonstandard": "Past"
@@ -28204,7 +28144,7 @@
 			"Vivillon-Fancy",
 			"Vivillon-Pokeball"
 		],
-		"tier": "PU"
+		"tier": "NU"
 	},
 	"vivillonfancy": {
 		"num": 666,
@@ -28235,8 +28175,7 @@
 		"evoLevel": 12,
 		"eggGroups": [
 			"Bug"
-		],
-		"tier": "PU"
+		]
 	},
 	"vivillonpokeball": {
 		"num": 666,
@@ -28257,16 +28196,15 @@
 		},
 		"abilities": {
 			"0": "Shield Dust",
-			"1": "Compound Eyes"
+			"1": "Compound Eyes",
+			"H": "Friend Guard"
 		},
 		"heightm": 1.2,
 		"weightkg": 17,
 		"color": "Black",
 		"eggGroups": [
 			"Bug"
-		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		]
 	},
 	"litleo": {
 		"num": 667,
@@ -29547,7 +29485,7 @@
 			"Flying",
 			"Human-Like"
 		],
-		"tier": "UU"
+		"tier": "RUBL"
 	},
 	"dedenne": {
 		"num": 702,
@@ -29576,7 +29514,7 @@
 			"Field",
 			"Fairy"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"carbink": {
 		"num": 703,
@@ -29605,8 +29543,7 @@
 			"Fairy",
 			"Mineral"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"goomy": {
 		"num": 704,
@@ -29711,8 +29648,7 @@
 		"eggGroups": [
 			"Dragon"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"goodra": {
 		"num": 706,
@@ -29748,7 +29684,7 @@
 			"Goodra",
 			"Goodra-Hisui"
 		],
-		"tier": "NUBL"
+		"tier": "RU"
 	},
 	"goodrahisui": {
 		"num": 706,
@@ -29780,8 +29716,7 @@
 		"eggGroups": [
 			"Dragon"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"klefki": {
 		"num": 707,
@@ -30224,7 +30159,7 @@
 			"Avalugg",
 			"Avalugg-Hisui"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"avalugghisui": {
 		"num": 713,
@@ -30257,8 +30192,7 @@
 			"Monster",
 			"Mineral"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NU"
 	},
 	"noibat": {
 		"num": 714,
@@ -30321,7 +30255,7 @@
 			"Flying",
 			"Dragon"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"xerneas": {
 		"num": 716,
@@ -30569,8 +30503,7 @@
 			"Diancie",
 			"Diancie-Mega"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"dianciemega": {
 		"num": 719,
@@ -30639,8 +30572,7 @@
 			"Hoopa",
 			"Hoopa-Unbound"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"hoopaunbound": {
 		"num": 720,
@@ -30670,8 +30602,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Hoopa",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"volcanion": {
 		"num": 721,
@@ -30701,8 +30632,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"rowlet": {
 		"num": 722,
@@ -30773,7 +30703,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"decidueye": {
 		"num": 724,
@@ -30813,7 +30743,7 @@
 			"Decidueye",
 			"Decidueye-Hisui"
 		],
-		"tier": "OU"
+		"tier": "RU"
 	},
 	"decidueyehisui": {
 		"num": 724,
@@ -30848,8 +30778,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"litten": {
 		"num": 725,
@@ -31224,7 +31153,7 @@
 			"Gumshoos",
 			"Gumshoos-Totem"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"gumshoostotem": {
 		"num": 735,
@@ -31481,7 +31410,7 @@
 			"Oricorio-Pa'u",
 			"Oricorio-Sensu"
 		],
-		"tier": "PUBL"
+		"tier": "NUBL"
 	},
 	"oricoriopompom": {
 		"num": 741,
@@ -31580,7 +31509,7 @@
 			"Flying"
 		],
 		"changesFrom": "Oricorio",
-		"tier": "NUBL"
+		"tier": "RU"
 	},
 	"cutiefly": {
 		"num": 742,
@@ -31759,7 +31688,7 @@
 			"Lycanroc-Midnight",
 			"Lycanroc-Dusk"
 		],
-		"tier": "NU"
+		"tier": "RU"
 	},
 	"lycanrocmidnight": {
 		"num": 745,
@@ -31821,7 +31750,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "UU"
+		"tier": "RUBL"
 	},
 	"wishiwashi": {
 		"num": 746,
@@ -32521,7 +32450,7 @@
 		"eggGroups": [
 			"Grass"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"comfey": {
 		"num": 764,
@@ -32581,7 +32510,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"passimian": {
 		"num": 766,
@@ -32607,7 +32536,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "RU"
 	},
 	"wimpod": {
 		"num": 767,
@@ -33497,7 +33426,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "RU"
+		"tier": "NU"
 	},
 	"turtonator": {
 		"num": 776,
@@ -33629,7 +33558,7 @@
 			"Mimikyu-Totem",
 			"Mimikyu-Busted-Totem"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"mimikyubusted": {
 		"num": 778,
@@ -34589,8 +34518,7 @@
 			"Magearna",
 			"Magearna-Original"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"magearnaoriginal": {
 		"num": 801,
@@ -34618,8 +34546,7 @@
 		"color": "Red",
 		"eggGroups": [
 			"Undiscovered"
-		],
-		"isNonstandard": "Unobtainable"
+		]
 	},
 	"marshadow": {
 		"num": 802,
@@ -34934,8 +34861,7 @@
 			"Field",
 			"Grass"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"thwackey": {
 		"num": 811,
@@ -34971,8 +34897,7 @@
 			"Field",
 			"Grass"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"rillaboom": {
 		"num": 812,
@@ -35006,8 +34931,7 @@
 			"Grass"
 		],
 		"canGigantamax": "G-Max Drum Solo",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"rillaboomgmax": {
 		"num": 812,
@@ -35215,8 +35139,7 @@
 			"Water 1",
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"drizzile": {
 		"num": 817,
@@ -35252,8 +35175,7 @@
 			"Water 1",
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"inteleon": {
 		"num": 818,
@@ -35287,8 +35209,7 @@
 			"Field"
 		],
 		"canGigantamax": "G-Max Hydrosnipe",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"inteleongmax": {
 		"num": 818,
@@ -35380,7 +35301,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"rookidee": {
 		"num": 821,
@@ -35880,7 +35801,7 @@
 			"Water 1"
 		],
 		"canGigantamax": "G-Max Stonesurge",
-		"tier": "RUBL"
+		"tier": "RU"
 	},
 	"drednawgmax": {
 		"num": 834,
@@ -36035,7 +35956,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"coalossal": {
 		"num": 839,
@@ -36617,8 +36538,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"canGigantamax": "G-Max Stun Shock",
-		"tier": "RU"
+		"canGigantamax": "G-Max Stun Shock"
 	},
 	"toxtricitygmax": {
 		"num": 849,
@@ -36950,7 +36870,7 @@
 			"Polteageist",
 			"Polteageist-Antique"
 		],
-		"tier": "UU"
+		"tier": "RUBL"
 	},
 	"polteageistantique": {
 		"num": 855,
@@ -37045,7 +36965,7 @@
 		"eggGroups": [
 			"Fairy"
 		],
-		"tier": "NFE"
+		"tier": "NU"
 	},
 	"hatterene": {
 		"num": 858,
@@ -37211,7 +37131,7 @@
 			"Human-Like"
 		],
 		"canGigantamax": "G-Max Snooze",
-		"tier": "UU"
+		"tier": "NUBL"
 	},
 	"grimmsnarlgmax": {
 		"num": 861,
@@ -37607,7 +37527,7 @@
 			"Water 1",
 			"Amorphous"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"snom": {
 		"num": 872,
@@ -37667,7 +37587,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "NU"
+		"tier": "RU"
 	},
 	"stonjourner": {
 		"num": 874,
@@ -37692,7 +37612,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"eiscue": {
 		"num": 875,
@@ -37725,7 +37645,7 @@
 			"Eiscue",
 			"Eiscue-Noice"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"eiscuenoice": {
 		"num": 875,
@@ -37791,7 +37711,7 @@
 			"Indeedee",
 			"Indeedee-F"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"indeedeef": {
 		"num": 876,
@@ -37948,7 +37868,7 @@
 			"Mineral"
 		],
 		"canGigantamax": "G-Max Steelsurge",
-		"tier": "NU"
+		"tier": "RU"
 	},
 	"copperajahgmax": {
 		"num": 879,
@@ -38298,8 +38218,7 @@
 			"Zacian-Crowned"
 		],
 		"cannotDynamax": true,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"zaciancrowned": {
 		"num": 888,
@@ -38331,8 +38250,7 @@
 		"requiredItem": "Rusted Sword",
 		"battleOnly": "Zacian",
 		"cannotDynamax": true,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"zamazenta": {
 		"num": 889,
@@ -38370,8 +38288,7 @@
 			"Zamazenta-Crowned"
 		],
 		"cannotDynamax": true,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"zamazentacrowned": {
 		"num": 889,
@@ -38403,8 +38320,7 @@
 		"requiredItem": "Rusted Shield",
 		"battleOnly": "Zamazenta",
 		"cannotDynamax": true,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"eternatus": {
 		"num": 890,
@@ -38442,8 +38358,7 @@
 			"Eternatus-Eternamax"
 		],
 		"cannotDynamax": true,
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"eternatuseternamax": {
 		"num": 890,
@@ -38510,8 +38425,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "NFE"
 	},
 	"urshifu": {
 		"num": 892,
@@ -38556,8 +38470,7 @@
 			"Urshifu-Rapid-Strike"
 		],
 		"canGigantamax": "G-Max One Blow",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"urshifurapidstrike": {
 		"num": 892,
@@ -38593,8 +38506,7 @@
 			"Undiscovered"
 		],
 		"canGigantamax": "G-Max Rapid Flow",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"urshifugmax": {
 		"num": 892,
@@ -38700,8 +38612,7 @@
 			"Zarude",
 			"Zarude-Dada"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RUBL"
 	},
 	"zarudedada": {
 		"num": 893,
@@ -38729,8 +38640,7 @@
 		"color": "Black",
 		"eggGroups": [
 			"Undiscovered"
-		],
-		"isNonstandard": "Unobtainable"
+		]
 	},
 	"regieleki": {
 		"num": 894,
@@ -38759,8 +38669,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"regidrago": {
 		"num": 895,
@@ -38789,8 +38698,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"glastrier": {
 		"num": 896,
@@ -38819,8 +38727,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"spectrier": {
 		"num": 897,
@@ -38849,8 +38756,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"calyrex": {
 		"num": 898,
@@ -38889,8 +38795,7 @@
 			"Calyrex-Ice",
 			"Calyrex-Shadow"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "(PU)"
 	},
 	"calyrexice": {
 		"num": 898,
@@ -38920,8 +38825,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Calyrex",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "Uber"
 	},
 	"calyrexshadow": {
 		"num": 898,
@@ -38951,8 +38855,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Calyrex",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "AG"
 	},
 	"wyrdeer": {
 		"num": 899,
@@ -38983,8 +38886,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "PU"
 	},
 	"kleavor": {
 		"num": 900,
@@ -39015,8 +38917,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"ursaluna": {
 		"num": 901,
@@ -39047,8 +38948,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"basculegion": {
 		"num": 902,
@@ -39088,8 +38988,7 @@
 			"Basculegion",
 			"Basculegion-F"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "RU"
 	},
 	"basculegionf": {
 		"num": 902,
@@ -39123,8 +39022,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"sneasler": {
 		"num": 903,
@@ -39156,8 +39054,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"overqwil": {
 		"num": 904,
@@ -39179,8 +39076,8 @@
 			"1": "Swift Swim",
 			"H": "Intimidate"
 		},
-		"heightm": 0.5,
-		"weightkg": 3.9,
+		"heightm": 2.5,
+		"weightkg": 60.5,
 		"color": "Gray",
 		"prevo": "Qwilfish-Hisui",
 		"evoType": "other",
@@ -39188,8 +39085,7 @@
 		"eggGroups": [
 			"Water 2"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"enamorus": {
 		"num": 905,
@@ -39228,8 +39124,7 @@
 			"Enamorus",
 			"Enamorus-Therian"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "OU"
 	},
 	"enamorustherian": {
 		"num": 905,
@@ -39259,8 +39154,7 @@
 			"Undiscovered"
 		],
 		"changesFrom": "Enamorus",
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "UU"
 	},
 	"sprigatito": {
 		"num": 906,
@@ -39432,7 +39326,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "NFE"
 	},
 	"skeledirge": {
 		"num": 911,
@@ -39465,7 +39359,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"quaxly": {
 		"num": 912,
@@ -39535,7 +39429,7 @@
 			"Flying",
 			"Water 1"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"quaquaval": {
 		"num": 914,
@@ -39569,7 +39463,7 @@
 			"Flying",
 			"Water 1"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"lechonk": {
 		"num": 915,
@@ -39638,7 +39532,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"oinkolognef": {
 		"num": 916,
@@ -39670,7 +39564,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"tarountula": {
 		"num": 917,
@@ -39727,7 +39621,7 @@
 		"eggGroups": [
 			"Bug"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"nymble": {
 		"num": 919,
@@ -39879,7 +39773,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"tandemaus": {
 		"num": 924,
@@ -40042,7 +39936,7 @@
 			"Field",
 			"Mineral"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"smoliv": {
 		"num": 928,
@@ -40173,7 +40067,7 @@
 		"eggGroups": [
 			"Flying"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"squawkabillyblue": {
 		"num": 931,
@@ -40311,7 +40205,7 @@
 			"1": "Sturdy",
 			"H": "Clear Body"
 		},
-		"heightm": 0.5,
+		"heightm": 0.6,
 		"weightkg": 105,
 		"color": "Brown",
 		"prevo": "Nacli",
@@ -40343,7 +40237,7 @@
 			"1": "Sturdy",
 			"H": "Clear Body"
 		},
-		"heightm": 2.5,
+		"heightm": 2.3,
 		"weightkg": 240,
 		"color": "Brown",
 		"prevo": "Naclstack",
@@ -40411,7 +40305,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "OU"
+		"tier": "RU"
 	},
 	"ceruledge": {
 		"num": 937,
@@ -40441,7 +40335,7 @@
 		"eggGroups": [
 			"Human-Like"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"tadbulb": {
 		"num": 938,
@@ -40684,7 +40578,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"bramblin": {
 		"num": 946,
@@ -40744,7 +40638,7 @@
 		"eggGroups": [
 			"Grass"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"toedscool": {
 		"num": 948,
@@ -40801,7 +40695,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"klawf": {
 		"num": 950,
@@ -40828,7 +40722,7 @@
 		"eggGroups": [
 			"Water 3"
 		],
-		"tier": "NU"
+		"tier": "PU"
 	},
 	"capsakid": {
 		"num": 951,
@@ -40889,7 +40783,7 @@
 		"eggGroups": [
 			"Grass"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"rellor": {
 		"num": 953,
@@ -41073,7 +40967,7 @@
 		"eggGroups": [
 			"Fairy"
 		],
-		"tier": "NFE"
+		"tier": "PU"
 	},
 	"tinkaton": {
 		"num": 959,
@@ -41163,7 +41057,7 @@
 		"eggGroups": [
 			"Water 3"
 		],
-		"tier": "PU"
+		"tier": "(PU)"
 	},
 	"bombirdier": {
 		"num": 962,
@@ -41371,7 +41265,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Uber"
+		"tier": "UU"
 	},
 	"orthworm": {
 		"num": 968,
@@ -41397,7 +41291,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "OU"
+		"tier": "RU"
 	},
 	"glimmet": {
 		"num": 969,
@@ -41427,7 +41321,7 @@
 		"eggGroups": [
 			"Mineral"
 		],
-		"tier": "LC"
+		"tier": "PU"
 	},
 	"glimmora": {
 		"num": 970,
@@ -41514,7 +41408,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "Uber"
+		"tier": "RU"
 	},
 	"flamigo": {
 		"num": 973,
@@ -41824,7 +41718,7 @@
 		"eggGroups": [
 			"Field"
 		],
-		"tier": "NU"
+		"tier": "NUBL"
 	},
 	"dudunsparcethreesegment": {
 		"num": 982,
@@ -41976,7 +41870,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"fluttermane": {
 		"num": 987,
@@ -42036,7 +41930,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"sandyshocks": {
 		"num": 989,
@@ -42066,7 +41960,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "OU"
 	},
 	"irontreads": {
 		"num": 990,
@@ -42096,7 +41990,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "OU"
+		"tier": "UU"
 	},
 	"ironbundle": {
 		"num": 991,
@@ -42186,7 +42080,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "RUBL"
 	},
 	"ironmoth": {
 		"num": 994,
@@ -42246,7 +42140,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"frigibax": {
 		"num": 996,
@@ -42408,8 +42302,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "Unreleased",
-		"isNonstandard": "Unobtainable"
+		"tier": "LC"
 	},
 	"gholdengo": {
 		"num": 1000,
@@ -42469,7 +42362,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "UU"
+		"tier": "RU"
 	},
 	"chienpao": {
 		"num": 1002,
@@ -42739,7 +42632,7 @@
 		"eggGroups": [
 			"Undiscovered"
 		],
-		"tier": "OU"
+		"tier": "RUBL"
 	},
 	"missingno": {
 		"num": 0,
@@ -45128,6 +45021,121 @@
 			"Field"
 		],
 		"gen": 8,
+		"tier": "CAP",
+		"isNonstandard": "CAP"
+	},
+	"ababo": {
+		"num": -69,
+		"name": "Ababo",
+		"types": [
+			"Fairy"
+		],
+		"genderRatio": {
+			"M": 0.75,
+			"F": 0.25
+		},
+		"baseStats": {
+			"hp": 42,
+			"atk": 35,
+			"def": 27,
+			"spa": 35,
+			"spd": 35,
+			"spe": 38
+		},
+		"abilities": {
+			"0": "Pixilate",
+			"1": "Rattled",
+			"H": "Own Tempo"
+		},
+		"heightm": 0.5,
+		"weightkg": 3.5,
+		"color": "White",
+		"evos": [
+			"Scattervein"
+		],
+		"eggGroups": [
+			"Undiscovered"
+		],
+		"canHatch": true,
+		"gen": 9,
+		"tier": "CAP LC",
+		"isNonstandard": "CAP"
+	},
+	"scattervein": {
+		"num": -70,
+		"name": "Scattervein",
+		"types": [
+			"Fairy"
+		],
+		"genderRatio": {
+			"M": 0.75,
+			"F": 0.25
+		},
+		"baseStats": {
+			"hp": 75,
+			"atk": 74,
+			"def": 87,
+			"spa": 62,
+			"spd": 89,
+			"spe": 63
+		},
+		"abilities": {
+			"0": "Pixilate",
+			"1": "Intimidate",
+			"H": "Own Tempo"
+		},
+		"heightm": 1.5,
+		"weightkg": 25,
+		"color": "Pink",
+		"prevo": "Ababo",
+		"evoType": "levelFriendship",
+		"evos": [
+			"Hemogoblin"
+		],
+		"eggGroups": [
+			"Monster",
+			"Fairy"
+		],
+		"canHatch": true,
+		"gen": 9,
+		"tier": "CAP NFE",
+		"isNonstandard": "CAP"
+	},
+	"hemogoblin": {
+		"num": -71,
+		"name": "Hemogoblin",
+		"types": [
+			"Fairy",
+			"Fire"
+		],
+		"genderRatio": {
+			"M": 0.75,
+			"F": 0.25
+		},
+		"baseStats": {
+			"hp": 90,
+			"atk": 96,
+			"def": 87,
+			"spa": 96,
+			"spd": 89,
+			"spe": 55
+		},
+		"abilities": {
+			"0": "Pixilate",
+			"1": "Intimidate",
+			"H": "Own Tempo"
+		},
+		"heightm": 1.4,
+		"weightkg": 85,
+		"color": "Pink",
+		"prevo": "Scattervein",
+		"evoType": "useItem",
+		"evoItem": "Fire Stone",
+		"eggGroups": [
+			"Monster",
+			"Fairy"
+		],
+		"gen": 9,
 		"tier": "CAP",
 		"isNonstandard": "CAP"
 	},

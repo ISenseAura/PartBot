@@ -2,7 +2,7 @@ module.exports = function (command, by, args, room, isPM, ...extraArgs) {
 	room = tools.getRoom(room);
 	command = command.toLowerCase();
 	const blocked = Boolean(Bot.rooms[room]?.ignore || Bot.rooms[room]?.blacklist?.includes(command));
-	if (blocked && !tools.hasPermission(by, 'admin') && !Bot.rooms[room]?.whitelist?.includes(command)) {
+	if (blocked && !tools.hasPermission(by, 'coder') && !Bot.rooms[room]?.whitelist?.includes(command)) {
 		return Bot.pm(by, `${Bot.rooms[room].ignore ? 'Most commands are' : 'This command is'} disabled in ${room}.`);
 	}
 	let commandReq;

@@ -9,13 +9,15 @@ module.exports = {
 		if (!args.length) args.push('help');
 		switch (args.shift().toLowerCase()) {
 			case 'help': case 'h': {
-				const help	= `The aim of the game is to get more than the dealer and win. However, if your score exceeds 21, you 'bust' and lose. Cards 2-10 have their face values; J, Q, and K are 10 apiece, and A can be 1 or 11. Use ${prefix}hit to draw another card, ${prefix}stay to end, or ${prefix}hand to see your cards.`;
+				const help = `The aim of the game is to get more than the dealer and win. However, if your score exceeds 21, you 'bust' and lose. Cards 2-10 have their face values; J, Q, and K are 10 apiece, and A can be 1 or 11. Use ${prefix}hit to draw another card, ${prefix}stay to end, or ${prefix}hand to see your cards.`;
 				if (tools.hasPermission(by, 'gamma', room)) return Bot.say(room, help);
 				else return Bot.roomReply(room, by, help);
 				break;
 			}
 			case 'new': case 'n': case 'create': case 'c': {
-				if (!tools.hasPermission(by, 'beta', room)) return Bot.roomReply(room, by, 'Access denied.');
+				if (!tools.hasPermission(by, 'beta', room) &&
+					!(room === 'portugus' && tools.hasPermission(by, 'gamma', room))
+				) return Bot.roomReply(room, by, 'Access denied.');
 				if (Bot.rooms[room].blackjack) return Bot.say(room, `A game of Blackjack is in signups! Use \`\`${prefix}blackjack join\`\` to join!`);
 				Bot.rooms[room].blackjack = {
 					players: {},
@@ -58,8 +60,13 @@ module.exports = {
 							Bot.say(room, `Winners: ${winners.length ? tools.listify(winners) : 'None'}!`);
 							const nbj = winners.filter(player => Bot.rooms[room].blackjack.players[toID(player)].nbj);
 							if (nbj.length) Bot.say(room, `${tools.listify(nbj)} ${nbj.length == 1 ? 'has' : 'have'} a natural Blackjack!`);
-							nbj.forEach(player => tools.addPoints(0, player, 5, room));
-							winners.forEach(player => tools.addPoints(0, player, 5, room));
+							const pointsObj = {};
+							winners.forEach(u => pointsObj[u] = 5);
+							nbj.forEach(u => {
+								pointsObj[u] ??= 0;
+								pointsObj[u] += 5;
+							});
+							tools.addPoints(0, pointsObj, room, '_Blackjack');
 							return delete Bot.rooms[room].blackjack;
 						}
 						if (Bot.rooms[room].blackjack.timer) clearInterval(Bot.rooms[room].blackjack.timer);
@@ -95,14 +102,18 @@ module.exports = {
 				break;
 			}
 			case 'start': case 's': {
-				if (!tools.hasPermission(by, 'beta', room)) return Bot.roomReply(room, by, 'Access denied.');
+				if (!tools.hasPermission(by, 'beta', room) &&
+					!(room === 'portugus' && tools.hasPermission(by, 'gamma', room))
+				) return Bot.roomReply(room, by, 'Access denied.');
 				if (!Bot.rooms[room].blackjack) return Bot.say(room, `There isn't a game of Blackjack active...`);
 				Bot.rooms[room].blackjack.start(room);
 				return;
 				break;
 			}
 			case 'skip': {
-				if (!tools.hasPermission(by, 'beta', room)) return Bot.roomReply(room, by, 'Access denied.');
+				if (!tools.hasPermission(by, 'beta', room) &&
+					!(room === 'portugus' && tools.hasPermission(by, 'gamma', room))
+				) return Bot.roomReply(room, by, 'Access denied.');
 				if (!Bot.rooms[room].blackjack) return Bot.say(room, `There isn't a game of Blackjack active...`);
 				if (!Bot.rooms[room].blackjack.started) return Bot.say(room, 'Nope, hasn\'t started, yet.');
 				Bot.rooms[room].blackjack.nextTurn();
@@ -110,7 +121,9 @@ module.exports = {
 				break;
 			}
 			case 'end': case 'e': {
-				if (!tools.hasPermission(by, 'beta', room)) return Bot.roomReply(room, by, 'Access denied.');
+				if (!tools.hasPermission(by, 'beta', room) &&
+					!(room === 'portugus' && tools.hasPermission(by, 'gamma', room))
+				) return Bot.roomReply(room, by, 'Access denied.');
 				if (!Bot.rooms[room].blackjack) return Bot.say(room, 'Blackjack wasn\'t even ongoing, :eyes:.');
 				delete Bot.rooms[room].blackjack;
 				return Bot.say(room, 'The game of Blackjack has ended! No points will be awarded.');

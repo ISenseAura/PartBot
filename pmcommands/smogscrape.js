@@ -49,7 +49,7 @@ module.exports = {
 		}).finally(() => {
 			if (!Bot[key].replays.length) Bot.pm(by, "Oh, I didn't find any. ;-;");
 			// eslint-disable-next-line max-len
-			else Bot.serve(by, Bot[key].replays.sort().map(rep => `<a href="https://replay.pokemonshowdown.com/${rep}" target="_blank">https://replay.pokemonshowdown.com/${rep}</a>`).join('<br />'));
+			else Bot.serve(by, Bot[key].replays.sort().map(rep => `<a href="https://replay.pokemonshowdown.com/${rep}" target="_blank">https://replay.pokemonshowdown.com/${rep}</a>`).join('<br/>'));
 			setTimeout(() => delete Bot[key], 0);
 		});
 	}

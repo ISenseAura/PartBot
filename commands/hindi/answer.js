@@ -7,7 +7,7 @@ module.exports = {
 			let points;
 			const username = Bot.rooms[room].users.find(u => toID(u) === name).substr(1);
 			// console.log(name, Bot.rooms[room].users);
-			tools.addPoints(0, username, points = index > 3 ? 2 : 5 - index, 'groupchat-hindi-event').then(() => {
+			tools.addPoints(0, { [username]: points = index > 3 ? 2 : 5 - index }, 'groupchat-hindi-event', '_Event').then(() => {
 				Bot.pm(name, `Aapko ${points} points mile!`);
 			}).catch(err => {
 				Bot.pm(name, err.message);
@@ -23,7 +23,7 @@ module.exports = {
 		const id = toID(by);
 		const ans = toID(args.join(''));
 		const sol = toID(info.sol);
-		const offset = require('js-levenshtein')(ans, sol);
+		const offset = levenshtein(ans, sol);
 		if (offset > 1) return Bot.pm(by, `Aapka answer galat tha. ;-;`);
 		if (!info.solved.length) {
 			info.timer = setTimeout(() => {

@@ -15,7 +15,6 @@
     "origindb": "^2.6.1",
     "request": "^2.88.2",
     "sheets-parser": "^1.0.1",
-    "url": "^0.11.0",
     "websocket": "^1.0.29"
   },
   "scripts": {

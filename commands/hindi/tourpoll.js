@@ -45,7 +45,7 @@ module.exports = {
 			const OMs = {
 				'[Gen 9] Mayhem Random Battle': {
 					// eslint-disable-next-line max-len
-					code: '[Gen 9] Random Battle @@@ Team Preview, Max Teamsize=24, Picked Teamsize=6, [Gen 9] Shared Power, [Gen 9] Camomons, Scalemons Mod, Inverse Mod',
+					code: '[Gen 9] Random Battle @@@ Mayhem, Picked Team Size = 6, Max Team Size = 24',
 					// eslint-disable-next-line max-len
 					note: 'Iss tour mei bahut saare effects active honge - Scalemons, Inverse, Shared Power, aur Camomons - 24 mei se 6 chunke khelo!'
 				},
@@ -57,7 +57,7 @@ module.exports = {
 				},
 				'[Gen 8] Mayhem Random Battle': {
 					// eslint-disable-next-line max-len
-					code: '[Gen 8] Random Battle @@@ Team Preview, Max Teamsize=24, Picked Teamsize=6, [Gen 8] Shared Power, [Gen 8] Camomons, Scalemons Mod, Inverse Mod',
+					code: '[Gen 8] Random Battle @@@ Team Preview, Max Teamsize=24, Picked Teamsize=6, [Gen 8] Camomons, Scalemons Mod, Inverse Mod',
 					// eslint-disable-next-line max-len
 					note: 'Iss tour mei bahut saare effects active honge - Scalemons, Inverse, Shared Power, aur Camomons - 24 mei se 6 chunke khelo!'
 				}
@@ -121,6 +121,7 @@ module.exports = {
 			if (oldResult) Bot.say(room, `/tour name ${oldResult}`);
 			if (rules) Bot.say(room, `/tour rules ${rules}`);
 			if (note) Bot.say(room, `/wall ${note}`);
+			Bot.say(room, `/tour forcetimer on`);
 			obj[res][0] = 0;
 			Object.keys(obj).forEach(tier => {
 				if (opts.has(tier)) return;

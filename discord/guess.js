@@ -5,7 +5,7 @@ module.exports = {
 	guildOnly: [PZ.guildID, '871207224054272041'],
 	commandFunction: function (args, message, Bot) {
 		if (message.guild.id === '871207224054272041') {
-			if (!['888995370238103582' /* Code channel*/, '889548319238549514', '889548317338505256'].includes(message.channel.id)) {
+			if (!['888995370238103582' /* Code channel */, '889548319238549514', '889548317338505256'].includes(message.channel.id)) {
 				return message.channel.send("You don't look like a Death Match candidate...");
 			}
 			const obj = Bot.gtmm;

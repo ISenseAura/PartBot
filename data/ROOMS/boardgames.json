@@ -1,11 +1,18 @@
 {
 	"auth": {
-		"alpha": [],
+		"alpha": ["souboku"],
 		"beta": [],
-		"gamma": ["aegii", "aqrator", "arashdyslexic", "asxier", "azumad", "boltsapphire", "bubidajeffery", "diiee", "eu", "henka", "nothenka", "sandroeschen", "souboku", "toxicprotectrepeat", "warriorgallade"]
+		"gamma": ["arashdyslexic", "azumad", "boltsapphire", "bubidajeffery", "christmascarolexe", "cookers", "cornexe", "diiee", "eu", "henka", "iavh", "isserley", "mrtoastd", "nothenka", "protecttoxicrepeat", "sandroeschen", "siang", "silveste", "texting", "toxicprotectrepeat", "warriorgallade", "waterhoe", "yoshman8"]
 	},
 	"aliases": [
 		"bg",
 		"boredgames"
+	],
+	"points": [
+		[
+			"MengyBuck",
+			"MengyBucks",
+			"㋛"
+		]
 	]
 }

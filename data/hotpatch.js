@@ -63,7 +63,7 @@ module.exports = function (type, by) {
 							return reject(err.message);
 						}
 						delete require.cache[require.resolve('./DATA/moves.json')];
-						data.pokedex = require('./DATA/moves.json');
+						data.moves = require('./DATA/moves.json');
 						Bot.log(`${by} hotpatched the Movedex.`);
 						return resolve('Movedex');
 					});
@@ -115,9 +115,11 @@ module.exports = function (type, by) {
 			}
 
 			case 'customcolours': case 'cc': case 'customcolors': {
-				// TODO: Fix
-				return axios.get('http://play.pokemonshowdown.com/config/colors.json').then(res => {
-					fs.writeFile('./data/DATA/colors.json', JSON.stringify(res.data, null, '\t'), err => {
+				return axios.get('http://play.pokemonshowdown.com/config/colors.json').then(async res => {
+					const configStr = await axios.get('https://play.pokemonshowdown.com/config/config.js');
+					const pairs = configStr.data.match(/(?<=')[a-z0-9]+': '[a-z0-9]*(?=')/g).map(match => match.split(`': '`));
+					const obj = Object.assign(Object.fromEntries(pairs), res.data);
+					fs.writeFile('./data/DATA/colors.json', JSON.stringify(obj, null, '\t'), err => {
 						if (err) return reject(err.message);
 						delete require.cache[require.resolve('./DATA/colors.json')];
 						global.COLORS = require('./DATA/colors.json');
@@ -147,10 +149,8 @@ module.exports = function (type, by) {
 					Bot.log(`${by} hotpatched games.`);
 					return resolve('games');
 				}).catch(err => {
-					reject(err.message || 'Uh-oh');
 					Bot.log(err);
-					Bot.tempErr = err;
-					Bot.say('botdevelopment', JSON.stringify(err));
+					reject(err.message);
 				});
 			}
 
@@ -291,6 +291,10 @@ module.exports = function (type, by) {
 			case 'events': {
 				// TODO: Do this
 				return reject('Pfft skill issue');
+			}
+
+			case 'table': {
+				delete require.cache[require.resolve('./TABLE/templates.js')];
 			}
 
 			default: return reject('Unable to find a valid hotpatch.');

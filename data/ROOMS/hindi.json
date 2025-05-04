@@ -8,6 +8,14 @@
 		"lightsout",
 		"mastermind",
 		"othello",
-		"quovadis"
+		"quovadis",
+		"pat"
+	],
+	"points": [
+		[
+			"Point",
+			"Points",
+			"P"
+		]
 	]
 }

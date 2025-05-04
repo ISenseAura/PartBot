@@ -1,6 +1,6 @@
 module.exports = {
 	cooldown: 1000,
-	help: `Fixes the Bot's nickname in memory.`,
+	help: `Displays a shiny sprite.`,
 	permissions: 'gamma',
 	commandFunction: function (Bot, room, time, by, args, client) {
 		const monID = toID(args.join(''));

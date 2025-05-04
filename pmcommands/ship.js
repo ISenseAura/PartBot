@@ -7,7 +7,7 @@ module.exports = {
 		if (cargs.length < 1 || cargs.length > 2) return Bot.pm(by, unxa);
 		if (!cargs[1]) cargs.push(by.substr(1));
 		const terms = Array.from(cargs);
-		cargs.sort();
+		cargs.sort((a, b) => toID(a) > toID(b) ? 1 : -1);
 		const comp = require('crypto')
 			.createHash('md5')
 			.update(toID(cargs[0]) + '&' + toID(cargs[1]), 'utf8')

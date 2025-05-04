@@ -65,12 +65,12 @@ PartBot has the following structure:
 
 ### Globals
 PartBot's code has a variety of global variables, all of which can be found from global.js. Commonly used ones include:
-1. ``toID``: The single most-used function in PartBot's code. Coverts a string input to its ID. (This was formerly known as toId, feel free to convert it to toID wherever you see it)
-1. ``unxa``: "Unexpected number of arguments."
-1. ``tools``: A global object with various useful functions. Go through ``./data/tools.js`` to view / edit them.
-1. ``data``: A global object that stores most of the data (Pokedex, moves, etc). Check the requires in ``./globals.js`` to view the individual sources, which are mostly in ``./data/DATA``.
-1. ``GAMES``: PartBot's Games module. You can find most of PartBot's games here; the module is in `data/GAMES`.
-1. ``Bot``: The PS client. The class is defined in ``client.js``, but the instance is global. Primary functions include ``Bot.say(roomid, text)`` and ``Bot.pm(userid, text)``. State is mostly stored under various keys in the main object, and room data can be found in ``Bot.rooms``. Most games are assigned to the ``Bot.rooms[roomid]`` object.
+1. `toID`: The single most-used function in PartBot's code. Coverts a string input to its ID. (This was formerly known as toId, feel free to convert it to toID wherever you see it)
+1. `unxa`: "Unexpected number of arguments."
+1. `tools`: A global object with various useful functions. Go through ``./data/tools.js`` to view / edit them.
+1. `data`: A global object that stores most of the data (Pokedex, moves, etc). Check the requires in ``./globals.js`` to view the individual sources, which are mostly in ``./data/DATA``.
+1. `GAMES`: PartBot's Games module. You can find most of PartBot's games here; the module is in `data/GAMES`.
+1. `Bot`: The PS client. The class is defined in ``client.js``, but the instance is global. Primary functions include ``Bot.say(roomid, text)`` and ``Bot.pm(userid, text)``. State is mostly stored under various keys in the main object, and room data can be found in ``Bot.rooms``. Most games are assigned to the ``Bot.rooms[roomid]`` object.
 
 
 ### Discord Setup
@@ -103,8 +103,8 @@ Documentation for these will come soon. :sweat_smile:
  - [ ] Add moderation / promotion commands.
  - [ ] Add CONTRIBUTING.md.
  - [ ] Add proper website navigation.
- - [ ] Do the stuff marked to-do #smort
- 
+ - [ ] Resolve all unresolved TODO comments
+ - [ ] Use MongoDB over origindb for more stuff
  
  ### Credits:
  PartMan - Lead Developer

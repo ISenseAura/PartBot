@@ -5,5 +5,12 @@
 	"aliases": [
 		"botdev",
 		"joim"
+	],
+	"points": [
+		[
+			"Point",
+			"Points",
+			"P"
+		]
 	]
 }

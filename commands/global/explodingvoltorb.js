@@ -16,7 +16,7 @@ module.exports = {
 			}
 			case 'new': case 'n': case 'create': case 'c': {
 				if (cf) return;
-				if (/* !(['boardgames'].includes(room) && tools.hasPermission(by, 'gamma', room)) && */!tools.hasPermission(by, 'beta', room)) return Bot.pm(by, 'Access denied.');
+				if (!(['boardgames'].includes(room) && tools.hasPermission(by, 'gamma', room)) && !tools.hasPermission(by, 'beta', room)) return Bot.pm(by, 'Access denied.');
 				if (Bot.rooms[room].ev) return Bot.say(room, `One's already active!`);
 				Bot.rooms[room].ev = {
 					started: false,
@@ -76,8 +76,10 @@ module.exports = {
 						Bot.say(this.room, `GG! Thanks to ${tools.listify(this.PL)} for participating! All of 'em get 10 points!`);
 						const winner = this.players[Object.keys(this.players)[0]].name;
 						Bot.say(this.room, `And congratulations to ${winner} for not going kaboom! They get 5 extra points!`);
-						this.PL.forEach(player => tools.addPoints(0, player, 10, this.room));
-						tools.addPoints(0, winner, 5, room);
+						const pointsObj = Object.fromEntries(this.PL.map(player => [player, 10]));
+						pointsObj[winner] ??= 0;
+						pointsObj[winner] += 5;
+						tools.addPoints(0, pointsObj, room, '_ExplodingVoltorb');
 						return delete Bot.rooms[this.room].ev;
 					}
 				};

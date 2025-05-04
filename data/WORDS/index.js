@@ -18,6 +18,70 @@ const mods = {
 			else return false;
 		}
 	},
+	craxymons: {
+		aliases: [],
+		check(word, isNormalWord) {
+				return mods.crazymons.check(word, isNormalWord);
+		},
+		letters: {
+			A: 10,
+			B: 2,
+			C: 2,
+			D: 2,
+			E: 11,
+			F: 2,
+			G: 2,
+			H: 2,
+			I: 9,
+			J: 1,
+			K: 2,
+			L: 7,
+			M: 4,
+			N: 4,
+			O: 7,
+			P: 2,
+			Q: 1,
+			R: 5,
+			S: 6,
+			T: 5,
+			U: 5,
+			V: 1,
+			W: 2,
+			X: 1,
+			Y: 2,
+			Z: 1,
+			' ': 2,
+		},
+		points: {
+			A: 1,
+			B: 4,
+			C: 3,
+			D: 3,
+			E: 1,
+			F: 4,
+			G: 3,
+			H: 3,
+			I: 1,
+			J: 12,
+			K: 3,
+			L: 1,
+			M: 2,
+			N: 2,
+			O: 1,
+			P: 4,
+			Q: 12,
+			R: 1,
+			S: 1,
+			T: 1,
+			U: 1,
+			V: 10,
+			W: 4,
+			X: 5,
+			Y: 4,
+			Z: 8,
+			' ': 0
+		},
+	},
 	pokemon: {
 		aliases: ['mon', 'mons', 'poke', 'pokemod', 'pokewords'],
 		check: (word, isNormalWord) => {
@@ -47,3 +111,5 @@ module.exports = {
 	},
 	isDict: dict => dicts.hasOwnProperty(toID(dict))
 };
+
+

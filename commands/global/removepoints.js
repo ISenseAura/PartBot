@@ -20,11 +20,12 @@ module.exports = {
 			}
 		}
 		if (!flag) points = 1;
-		users.forEach(user => tools.addPoints(0, user, -points, room)).then(peeps => {
-			const list = tools.listify(peeps);
-			Bot.say(room, `${points} ${points === 1 ? cur[0] : cur[1]} ${points === 1 ? 'was' : 'were'} awarded to ${list}.`);
+		tools.addPoints(0, Object.fromEntries(users.map(user => [user, -points])), room, by).then(peeps => {
+			const list = tools.listify(users);
+			Bot.say(room, `${-points} ${points === -1 ? cur[0] : cur[1]} ${points === 1 ? 'was' : 'were'} taken from ${list}.`);
 		}).catch(e => {
-			Bot.say(room, e.message);
+			Bot.say(room, `Something went wrong: ${e.message}`);
+			Bot.log(e);
 		});
 	}
 };

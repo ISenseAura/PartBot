@@ -6,8 +6,8 @@ module.exports = {
 	permissions: 'none',
 	commandFunction: function (Bot, by, args, client) {
 		return Bot.pm(by, `B-but UGO is over!`);
-		const userID = toID(by);
-		if (!tools.hasPermission(by, 'boardgames', 'gamma') || Bot.rooms.boardgames?.users.find(u => toID(u) === userID)?.test(/^ /)) {
+		const uID = toID(by);
+		if (!tools.hasPermission(by, 'boardgames', 'gamma') || Bot.rooms.boardgames?.users.find(u => toID(u) === uID)?.match(/^ /)) {
 			return Bot.pm(by, `Access denied - please ask the auth member to PM me \`\`${prefix}rttt ${toID(by)}\`\``);
 		}
 		const cargs = args.join(' ').split(',').map(term => term.trim());
@@ -62,7 +62,7 @@ module.exports = {
 		HTMLs[HTMLs.length - 1] = `<center><h1>${target}${result}${user}</h1><br/>` + HTMLs[HTMLs.length - 1] + (winner === target ? `<form data-submitsend="/msgroom ugo,/pm UGO,;authhunt ${target}, Board Games"><input type="submit" value="Click to award points!" name="Click to award points!"></form>` : '') + '</center>';
 		// declare 'result'
 		function timer () {
-			if (!HTMLs.length) return Bot.say('ugo', `/modnote [boardgamesauthhunt] [${target}]${result}[${user}]`);
+			if (!HTMLs.length) return Bot.say('ugo', `/modnote [boardgamesauthhunt] [${toID(target)}]${result}[${toID(user)}]`);
 			const HTML = HTMLs.shift();
 			Bot.say('boardgames', `/sendhtmlpage ${target}, rttt${target}${user}, ${HTML.replace(/<form.*?form>/, '')}`);
 			Bot.say('boardgames', `/sendhtmlpage ${user}, rttt${target}${user}, ${HTML}`);

@@ -11,6 +11,6 @@ module.exports = {
 		game.W.player = '1v1lt61hupartm';
 		game.W.name = '1v1LT61HU PartM';
 		game.setBoard();
-		return Bot.say(room, `/adduhtml CHESS,${game.boardHTML(room, game.turn)}`);*/
+		return Bot.say(room, `/adduhtml CHESS,${game.boardHTML(room, game.turn)}`); */
 	}
 };

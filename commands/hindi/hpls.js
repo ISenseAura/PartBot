@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+
 module.exports = {
 	cooldown: 1,
 	help: `HPL schedule`,

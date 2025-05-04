@@ -1,3 +1,13 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 6;
+const gameName = 'scrabble';
+const gameTitle = 'Scrabble';
+const pointsWin = 40;
+const pointsLose = 25;
+*/
+
 function gameTimer (game, turn) {
 	const time = 120;
 	if (!Bot.rooms[game.room]) return;
@@ -11,6 +21,26 @@ function gameTimer (game, turn) {
 function clearGameTimer (game) {
 	clearTimeout(Bot.rooms[game.room]?.gameTimers?.[game.id]);
 }
+
+/*
+function endUGOgame ($) {
+	if ($.placed.flat().filter(c => c).length < 30) {
+		Object.keys($.players).forEach(p => Bot.say($.room, `The game was ended early and will not count towards the limit.`));
+		const users = Object.keys($.players);
+		const UGODB = Bot.UGO.object();
+		users.forEach(u => {
+			u = toID(u);
+			const userGames = (UGODB[u] || {});
+			userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+		});
+	} else {
+		const pointUsers = Object.values($.players).sort((a, b) => b.score - a.score).map(p => p.id);
+		const winner = pointUsers.shift();
+		awardUGOPoints(pointsWin, [winner].filter(p => Number(Bot.UGO.get(p)?.[gameName]) <= pointsLimit));
+		awardUGOPoints(pointsLose, pointUsers.filter(p => Number(Bot.UGO.get(p)?.[gameName]) <= pointsLimit));
+	}
+}
+*/
 
 module.exports = {
 	help: `Scrabble! \`\`${prefix}scrabble new\`\`, \`\`${prefix}scrabble join\`\`, and \`\`${prefix}scrabble start\`\``,
@@ -84,11 +114,10 @@ module.exports = {
 				if (!Bot.rooms[room].scrabble) Bot.rooms[room].scrabble = {};
 				const $ = Bot.rooms[room].scrabble;
 				const ID = Date.now();
-				$[ID] = GAMES.create('scrabble', ID, room);
+				$[ID] = GAMES.create('scrabble', ID, room/*, { modded: 'pokemon' }*/); // UGOCODE
 				// eslint-disable-next-line max-len
 				Bot.say(room, `/adduhtml SCRABBLE-${ID}, <hr><h1>Scrabble Signups have begun!</h1><button name="send" value="/msg ${Bot.status.nickName}, ${prefix}scrabble ${room}, join ${ID}">Join!</button><hr>`);
-				// eslint-disable-next-line max-len
-				Bot.say(room, '/notifyrank all, Scrabble, A new game of Scrabble has been created!, A new game of Scrabble has been created.');
+				Bot.say(room, '/notifyrank all, Scrabble, A new game of Scrabble has been created!,scrabblesignup');
 				fs.writeFile(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, JSON.stringify($), e => {
 					if (e) console.log(e);
 				});
@@ -99,6 +128,24 @@ module.exports = {
 				const $ = this.findGame(by, args.slice(1).join(' '), Bot.rooms[room].scrabble, 'join');
 				if (!$) return Bot.roomReply(room, by, 'No game specified/found');
 				const user = toID(by);
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+				}
+				*/
+				// ENDUGOCODE
 				$.addPlayer(by.replace(/^[^a-zA-Z0-9]/, '')).then(() => {
 					Bot.say(room, `${by.substr(1)} joined the game!`);
 					fs.writeFile(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, JSON.stringify($), e => {
@@ -112,6 +159,20 @@ module.exports = {
 				const $ = this.findGame(by, args.slice(1).join(' '), Bot.rooms[room].scrabble, 'action');
 				if (!$) return Bot.roomReply(room, by, 'No game specified/found');
 				$.removePlayer(by.replace(/^[^a-zA-Z0-9]/, '')).then(() => {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const users = [by];
+						const UGODB = Bot.UGO.object();
+						users.forEach(u => {
+							u = toID(u);
+							const userGames = (UGODB[u] || {});
+							userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+						});
+						Bot.UGO.save();
+					}
+					*/
+					// ENDUGOCODE
 					Bot.say(room, `${by.substr(1)} left the game!`);
 					fs.writeFile(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, JSON.stringify($), e => {
 						if (e) console.log(e);
@@ -155,8 +216,16 @@ module.exports = {
 				const word = args.join('');
 				$.play(coords, down, word).then(res => {
 					const [name, score, scores, bingo, receivedTiles] = res;
+					if (config.extConfig.aegii) {
+						try {
+							const logStr = `${new Date().toISOString()} | ${$.id} | ${name.padStart(25, ' ')} | ${scores.map(({ word }) => word).join(',').toUpperCase()}\n`;
+							fs.appendFileSync(config.extConfig.aegii, logStr);
+						} catch (err) {
+							Bot.log(err);
+						}
+					}
 					// eslint-disable-next-line max-len
-					Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${bingo ? '<b>BINGO!</b> ' : ''}${tools.colourize(name)} scored ${score} (${scores.join('/')})<hr/>`);
+					Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${bingo ? '<b>BINGO!</b> ' : ''}${tools.colourize(name)} scored ${score} (${scores.map(({ score, word }) => `${word} [${score}]`).join(' / ')})<span style="float:right"><button name="send" value="/msg ${Bot.status.nickName},${prefix}scrabble ${room} watch ${$.id}">Watch</button></span><hr/>`);
 					if (receivedTiles.includes(' ')) {
 						// eslint-disable-next-line max-len
 						Bot.roomReply(room, by, `If you want to use one of your blank tiles, then enter the letter you want the blank to be used as followed by a '. For example, if you’re trying to play the word trace and want to use your blank as a C, then you would type TRAC'E into the ‘Type your word here’ box.`);
@@ -164,12 +233,23 @@ module.exports = {
 					if (Object.values($.players).find(player => player.tiles.length === 0)) { // Game ends
 						$.ended = true;
 						$.deduct();
+						// UGOCODE
+						// if (UGOR(room)) endUGOgame($);
+						// ENDUGOCODE
 						$.spectators.forEach(u => Bot.say(room, $.HTML(u)));
 						Object.keys($.players).forEach(u => Bot.say(room, $.HTML(u)));
 						pName = Object.values($.players).sort((a, b) => b.score - a.score)[0];
 						Bot.say(room, `Game ended! ${pName.name} won!`);
 						Bot.say(room, `/adduhtml SCRABBLEBOARD${$.id},${$.boardHTML()}`);
 						Bot.say(room, `/adduhtml SCRABBLEPOINTS${$.id},${$.pointsHTML()}`);
+						if (config.extConfig.aegii) {
+							try {
+								const logStr = `${new Date().toISOString()} | ${$.id} | ${pName.name.padStart(25, ' ')} >>> WON\n`;
+								fs.appendFileSync(config.extConfig.aegii, logStr);
+							} catch (err) {
+								Bot.log(err);
+							}
+						}
 						fs.unlink(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, () => {});
 						clearGameTimer($);
 						delete Bot.rooms[room].scrabble[$.id];
@@ -237,7 +317,7 @@ module.exports = {
 						Bot.roomReply(room, by, `If you want to use one of your blank tiles, then enter the letter you want the blank to be used as followed by a '. For example, if you’re trying to play the word trace and want to use your blank as a C, then you would type TRAC'E into the ‘Type your word here’ box.`);
 					}
 					// eslint-disable-next-line max-len
-					Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${tools.colourize(by.substr(1))} exchanged ${res[0].length} tile(s)<hr/>`);
+					Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${tools.colourize(by.substr(1))} exchanged ${res[0].length} tile(s)<span style="float:right"><button name="send" value="/msg ${Bot.status.nickName},${prefix}scrabble ${room} watch ${$.id}">Watch</button></span><hr/>`);
 					$.nextTurn();
 					$.spectators.forEach(u => Bot.say(room, $.HTML(u)));
 					Bot.say(room, $.highlight());
@@ -264,12 +344,20 @@ module.exports = {
 					Object.keys($.players).forEach(u => Bot.say(room, $.HTML(u)));
 					Bot.say(room, `/adduhtml SCRABBLEBOARD${$.id},${$.boardHTML()}`);
 					Bot.say(room, `/adduhtml SCRABBLEPOINTS${$.id},${$.pointsHTML()}`);
+					if (config.extConfig.aegii) {
+						try {
+							const logStr = `${new Date().toISOString()} | ${$.id} | ${pName.name.padStart(25, ' ')} >>> WON\n`;
+							fs.appendFileSync(config.extConfig.aegii, logStr);
+						} catch (err) {
+							Bot.log(err);
+						}
+					}
 					fs.unlink(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, () => {});
 					clearGameTimer($);
 					delete Bot.rooms[room].scrabble[$.id];
 					return;
 				}
-				Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${tools.colourize(by.substr(1))} passed<hr/>`);
+				Bot.say(room, `/adduhtml scrabbleplay${$.id},<hr/>${tools.colourize(by.substr(1))} passed <span style="color:rgba(0,0,0,0)">gas</span><span style="float:right"><button name="send" value="/msg ${Bot.status.nickName},${prefix}scrabble ${room} watch ${$.id}">Watch</button></span><hr/>`);
 				gameTimer($, $.players[$.order[$.turn]].name);
 				$.spectators.forEach(u => Bot.say(room, $.HTML(u)));
 				Object.keys($.players).forEach(u => Bot.say(room, $.HTML(u)));
@@ -290,6 +378,20 @@ module.exports = {
 					Bot.say(room, `/adduhtml SCRABBLEBOARD${$.id},${$.boardHTML()}`);
 					Bot.say(room, `/adduhtml SCRABBLEPOINTS${$.id},${$.pointsHTML()}`);
 				}
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const users = Object.keys($.players).filter(t => t);
+					const UGODB = Bot.UGO.object();
+					users.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				fs.unlink(`./data/BACKUPS/scrabble-${$.room}-${$.id}.json`, () => {});
 				delete Bot.rooms[room].scrabble[$.id];
 				break;
@@ -358,6 +460,9 @@ module.exports = {
 						$.ended = true;
 						Bot.say(room, `The match has ended due to a forfeit.`);
 						$.deduct();
+						// UGOCODE
+						// if (UGOR(room)) endUGOgame($);
+						// ENDUGOCODE
 						$.spectators.forEach(u => Bot.say(room, $.HTML(u)));
 						Object.keys($.players).forEach(u => Bot.say(room, $.HTML(u)));
 						Bot.say(room, `/adduhtml SCRABBLEBOARD${$.id},${$.boardHTML()}`);
@@ -392,10 +497,14 @@ module.exports = {
 						.map(file => file.split('-').pop());
 					if (games.length) {
 						Bot.say(room, `/adduhtml SCRABBLEBACKUPS, <details><summary>Game Backups</summary><hr>${games.map(game => {
-							const $ = require(`../../data/BACKUPS/scrabble-${room}-${game}.json`);
-							// eslint-disable-next-line max-len
-							return `<button name="send" value="/msg ${Bot.status.nickName},${prefix}scrabble ${room} restore ${game}">${tools.escapeHTML(tools.listify($.order.map(p => $.players[p].name))) || '(no one)'}</button>`;
-						}).join('<br>')}</details>`);
+							try {
+								const $ = require(`../../data/BACKUPS/scrabble-${room}-${game}.json`);
+								// eslint-disable-next-line max-len
+								return `<button name="send" value="/msg ${Bot.status.nickName},${prefix}scrabble ${room} restore ${game}">${tools.escapeHTML(tools.listify($.order.map(p => $.players[p].name))) || '(no one)'}</button>`;
+							} catch {
+								return null;
+							}
+						}).filter(Boolean).join('<br>')}</details>`);
 					} else Bot.say(room, "No backups found.");
 				});
 				break;
@@ -456,6 +565,9 @@ module.exports = {
 						$.ended = true;
 						Bot.say(room, `The match has ended due to a disqualification.`);
 						$.deduct();
+						// UGOCODE
+						// if (UGOR(room)) endUGOgame($);
+						// ENDUGOCODE
 						$.spectators.forEach(u => Bot.say(room, $.HTML(u)));
 						Object.keys($.players).forEach(u => Bot.say(room, $.HTML(u)));
 						Bot.say(room, `/adduhtml SCRABBLEBOARD${$.id},${$.boardHTML()}`);
@@ -507,6 +619,33 @@ module.exports = {
 				}
 				const going = first ? ctx[0] : ctx[1];
 				const coming = first ? ctx[1] : ctx[0];
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const user = toID(coming);
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.say(room, `[[ ]]${user} has already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+					const users = [toID(going)];
+					const UGODB = Bot.UGO.object();
+					users.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName]--;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				$.players[toID(coming)] = $.players[toID(going)];
 				delete $.players[toID(going)];
 				$.players[toID(coming)].name = coming;
@@ -542,6 +681,9 @@ module.exports = {
 				break;
 			}
 			case 'mod': case 'mode': case 'om': case 'gamemode': case 'modify': case 'gamemod': case 'fm': case 'forcemod': {
+				// UGOCODE
+				// return Bot.roomReply(room, by, `PokéMod is the only mod playable during UGO. POKÉMOD SUPREMACY!`);
+				// ENDUGOCODE
 				if (!tools.hasPermission(by, 'gamma', room)) return Bot.roomReply(room, by, 'Access denied.');
 				if (!Bot.rooms[room].scrabble) Bot.rooms[room].scrabble = {};
 				const cargs = args.slice(1).join(' ').split(',');

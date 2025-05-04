@@ -1,3 +1,14 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 20;
+const gameName = 'othello';
+const gameTitle = 'Othello';
+const pointsWin = 15;
+const pointsDraw = 12;
+const pointsLose = 10;
+*/
+
 function gameTimer (game, turn) {
 	const time = 60;
 	if (!Bot.rooms[game.room]) return;
@@ -12,7 +23,7 @@ function clearGameTimer (game) {
 }
 
 function sendEmbed (room, winner, players, board, logs, scores) {
-	Bot.say(room, `http://partbot.partman.co.in/othello/${logs}`);
+	Bot.say(room, `${websiteLink}/othello/${logs}`);
 	if (!['boardgames'].includes(room)) return;
 	const Embed = require('discord.js').MessageEmbed, embed = new Embed();
 	embed
@@ -85,6 +96,15 @@ function runMoves (run, info, game) {
 			Bot.say(room, `/sendhtmlpage ${game.B.id}, Othello + ${room} + ${id}, <center><h1>Resigned.</h1>${game.boardHTML(true)}</center>`);
 			Bot.say(room, `${players[loser]} resigned.`);
 			logs += winner === 'W' ? 'Y' : 'Z';
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				const played = Number(Bot.UGO.get(game[winner].id)?.[gameName]);
+				if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(game[winner].id)]);
+				awardUGOPoints(pointsLose, [game[loser].id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+			}
+			*/
+			// ENDUGOCODE
 			delete Bot.rooms[room].othello[id];
 			return sendEmbed(room, winner, players, board, logs);
 		}
@@ -101,6 +121,13 @@ function runMoves (run, info, game) {
 			Bot.say(room, `/sendhtmlpage ${game.B.id}, Othello + ${room} + ${id}, <center><h1>Force-drawed</h1>${game.boardHTML(true)}</center>`);
 			Bot.say(room, `The game was forcefully drawn.`);
 			logs += '_';
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				awardUGOPoints(pointsDraw, [game.W.id, game.B.id].filter(p => Number(Bot.UGO.get(p)?.[gameName]) <= pointsLimit));
+			}
+			*/
+			// ENDUGOCODE
 			delete Bot.rooms[room].othello[id];
 			return sendEmbed(room, 'O', players, board, logs);
 		}
@@ -118,6 +145,19 @@ function runMoves (run, info, game) {
 			let wScore, bScore;
 			// eslint-disable-next-line max-len
 			Bot.say(room, `Game ended! ${game[winner] ? `${game[winner].name} won!` : 'It was a draw!'} ${wScore = board.reduce((accu, row) => accu + row.reduce((acc, cur) => cur === 'W' ? acc + 1 : acc, 0), 0)}W/${bScore = board.reduce((accu, row) => accu + row.reduce((acc, cur) => cur === 'B' ? acc + 1 : acc, 0), 0)}B`);
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				if (game[winner]) {
+					const played = Number(Bot.UGO.get(game[winner].id)?.[gameName] || 0);
+					if (played <= pointsLimit) awardUGOPoints(pointsWin, [game[winner].id]);
+					awardUGOPoints(pointsLose, [game[winner === 'W' ? 'B' : 'W'].id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName] || 0) <= pointsLimit));
+				} else {
+					awardUGOPoints(pointsDraw, [game.W.id, game.B.id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName] || 0) <= pointsLimit));
+				}
+			}
+			*/
+			// ENDUGOCODE
 			delete Bot.rooms[room].othello[id];
 			return sendEmbed(room, winner, players, board, logs, [wScore, bScore]);
 		}
@@ -143,13 +183,13 @@ module.exports = {
 				if (!tools.hasPermission(by, 'gamma', room)) return Bot.roomReply(room, by, 'Access denied.');
 				if (isPM) return Bot.roomReply(room, by, `Thou art stinky, do this in a chatroom`);
 				if (!tools.canHTML(room)) return Bot.say(room, 'I can\'t do that here. Ask an RO to promote me or something.');
+				Bot.say(room, `/sendprivatehtmlbox ${by}, <h2>Psst; in the future use ]othello instead! This version is being phased out.</h2>`);
 				if (!Bot.rooms[room].othello) Bot.rooms[room].othello = {};
 				const id = Date.now();
 				Bot.rooms[room].othello[id] = GAMES.create('othello', id, room);
 				// eslint-disable-next-line max-len
 				Bot.say(room, `/adduhtml OTHELLO-${id}, <hr/><h1>Othello Signups have begun!</h1><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room}, join ${id} White">White</button><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room}, join ${id} Black">Black</button><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room}, join ${id} Random">Random</button><hr/>`);
-				// eslint-disable-next-line max-len
-				Bot.say(room, '/notifyrank all, Othello, A new game of Othello has been created!, A new game of Othello has been created.');
+				Bot.say(room, '/notifyrank all, Othello, A new game of Othello has been created!,othellosignup');
 				break;
 			}
 			case 'join': case 'j': {
@@ -200,6 +240,24 @@ module.exports = {
 				if (game[other].id === user) {
 					return Bot.roomReply(room, by, "~~You couldn't find anyone else to fight you? __Really__?~~");
 				}
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+				}
+				*/
+				// ENDUGOCODE
 				// eslint-disable-next-line max-len
 				Bot.say(room, `${by.substr(1)} joined Othello (#${id}) as ${side === 'W' ? 'White' : 'Black'}!${rand ? ' (random)' : ''}`);
 				runMoves('join', { user: by.substr(1), side: side }, game);
@@ -269,6 +327,34 @@ module.exports = {
 				if ([game.W.id, game.B.id].includes(toID(by)) && !tools.hasPermission(by, 'coder')) {
 					return Bot.say(room, "Hah! Can't sub yourself out.");
 				}
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const coming = users.find(u => ![game.W.id, game.B.id].includes(u)), going = users.find(u => [game.W.id, game.B.id].includes(u));
+					const user = coming;
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.say(room, `[[ ]]${user} has already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+					const lusers = [going];
+					const UGODB = Bot.UGO.object();
+					lusers.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				let ex, add;
 				if (users.includes(game.W.id)) {
 					if (users[0] === game.W.id) {
@@ -325,6 +411,20 @@ module.exports = {
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				if (!game.started) Bot.say(room, `/changeuhtml OTHELLO-${id}, <hr/>Ended. :(<hr/>`);
 				clearGameTimer(game);
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const users = [game.W.id, game.B.id].filter(t => t);
+					const UGODB = Bot.UGO.object();
+					users.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				delete Bot.rooms[room].othello[id];
 				fs.unlink(`./data/BACKUPS/othello-${room}-${id}.json`, () => {});
 				return Bot.say(room, `Welp, ended Othello#${id}.`);
@@ -340,6 +440,20 @@ module.exports = {
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				clearGameTimer(game);
 				if (!game.started) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const users = [game.W.id, game.B.id].filter(t => t);
+						const UGODB = Bot.UGO.object();
+						users.forEach(u => {
+							u = toID(u);
+							const userGames = (UGODB[u] || {});
+							userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+						});
+						Bot.UGO.save();
+					}
+					*/
+					// ENDUGOCODE
 					delete Bot.rooms[room][gameName][game.id];
 					fs.unlink(`./data/BACKUPS/othello-${room}-${id}.json`, () => {});
 					return Bot.say(room, `/changeuhtml OTHELLO-${id}, <hr/>Ended. :(<hr/>`);
@@ -364,10 +478,14 @@ module.exports = {
 						.map(file => file.replace(/[^0-9]/g, ''));
 					if (games.length) {
 						Bot.say(room, `/adduhtml OTHELLOBACKUPS, <details><summary>Game Backups</summary><hr />${games.map(game => {
-							const info = require(`../../data/BACKUPS/othello-${room}-${game}.json`);
-							// eslint-disable-next-line max-len
-							return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}othello ${room} restore ${game}">${info.W.name} vs ${info.B.name}</button>`;
-						}).join('<br />')}</details>`);
+							try {
+								const info = require(`../../data/BACKUPS/othello-${room}-${game}.json`);
+								// eslint-disable-next-line max-len
+								return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}othello ${room} restore ${game}">${info.W.name} vs ${info.B.name}</button>`;
+							} catch {
+								return null;
+							}
+						}).filter(Boolean).join('<br/>')}</details>`);
 					} else Bot.say(room, "No backups found.");
 				});
 				break;
@@ -402,12 +520,12 @@ module.exports = {
 					const game = othello[id];
 					// eslint-disable-next-line max-len
 					return `${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} join ${id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} join ${id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} spectate ${id}">Watch</button> ` : ''}(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				const staffHTML = `<hr />${Object.keys(othello).map(id => {
 					const game = othello[id];
 					// eslint-disable-next-line max-len
 					return `${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} join ${id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} join ${id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} spectate ${id}">Watch</button> ` : ''}${tools.hasPermission(by, 'gamma', room) ? `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} end ${id}">End</button> <button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}othello ${room} stash ${id}">Stash</button>` : ''}(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				if (isPM === 'export') return [html, staffHTML];
 				if (tools.hasPermission(by, 'gamma', room) && !isPM) {
 					Bot.say(room, `/adduhtml OTHELLOMENU,${html}`);

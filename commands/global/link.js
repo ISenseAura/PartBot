@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+
 module.exports = {
 	cooldown: 100,
 	help: `Links an image in a room.`,

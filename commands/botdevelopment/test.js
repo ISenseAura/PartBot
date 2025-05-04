@@ -3,6 +3,7 @@ module.exports = {
 	help: `Testing stuff.`,
 	permissions: 'coder',
 	commandFunction: function (Bot, room, time, by, args, client, redir = false) {
+		return Bot.say(room, 'TestA');
 		const pkmn = toID(args.join('')) || 'zacian';
 		const mon = data.unitedex.find(m => toID(m.name) === pkmn);
 		const lv = 15;

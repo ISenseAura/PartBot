@@ -32,10 +32,6 @@ module.exports = function (room, tourData, Bot) {
 			}
 		} else if (tourData[0] === 'end') {
 			try {
-				const json = JSON.parse(tourData[1]);
-				if (json.generator !== 'Single Elimination') return;
-				if (/casual|ignore|no ?points/i.test(json.format || '')) return;
-				if (json.bracketData.type !== 'tree') return;
 				// The actual algorithm is secret
 				// Nice try, though
 				Bot.commandHandler('leaderboard', '#PartMan', [], room);
@@ -44,7 +40,9 @@ module.exports = function (room, tourData, Bot) {
 			}
 		}
 	}
-	if (room === 'groupchat-botdevelopment-p') {
-		Bot.log(tourData);
+	if (room === 'galligallisimsim') {
+		if (tourData?.[0] === 'end') {
+			setTimeout(() => Bot.say(room, '/modchat +'), 5 * 60_000);
+		}
 	}
 };

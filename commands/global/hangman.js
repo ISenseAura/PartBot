@@ -16,11 +16,11 @@ module.exports = {
 			else if (arg === 'colour' || arg === 'color' || arg === 'c') hint = 'Colour: ';
 			else if (arg === 'type' || arg === 'types' || arg === 't') hint = 'Type(s): ';
 			else if (arg === 'bst' || arg === 'b') hint = 'BST: ';
-			else if (arg === 'stat' || arg === 's') {
-				hint = ['HP: ', 'Atk: ', 'Def: ', 'SpA: ', 'SpD: ', 'Spe: '][Math.floor(Math.random() * 6)];
-			} else if (arg === 'egg' || arg === 'e') hint = 'Egg group(s): ';
+			else if (arg === 'stat' || arg === 's') hint = ['HP: ', 'Atk: ', 'Def: ', 'SpA: ', 'SpD: ', 'Spe: '].random();
+			else if (arg === 'egg') hint = 'Egg group(s): ';
 			else if (arg === 'none' || arg === 'n') hint = 'A Pokemon!';
 			else if (arg === 'cap') hint = 'CAP! :D';
+			else if (arg === 'everything' || arg === 'e') hint = 'Pokémon/Move/Ability/Item!';
 			else return Bot.say(room, 'Unable to find requested hint.');
 		}
 		const pokedex = data.pokedex;
@@ -28,7 +28,9 @@ module.exports = {
 			if (hint === 'CAP! :D') return pokedex[m].isNonstandard === 'CAP';
 			return !pokedex[m].forme && pokedex[m].num > 0;
 		});
+		let sol;
 		const mon = pokedex[filDex.random()];
+		sol = mon.name;
 		let hintData = '';
 		const randPokeNum = mon.num;
 		if (randPokeNum >= 1 && randPokeNum <= 151) hintData = '1';
@@ -38,7 +40,8 @@ module.exports = {
 		if (randPokeNum >= 494 && randPokeNum <= 649) hintData = '5';
 		if (randPokeNum >= 650 && randPokeNum <= 721) hintData = '6';
 		if (randPokeNum >= 722 && randPokeNum <= 809) hintData = '7';
-		if (randPokeNum >= 810) hintData = '8';
+		if (randPokeNum >= 810 && randPokeNum <= 905) hintData = '8';
+		if (randPokeNum >= 906) hintData = '9';
 		// if (randPokeNum < 0) hintData = 'CAP';
 		if (hint === 'Colour: ') hintData = mon.color;
 		else if (hint === 'Type(s): ') hintData = mon.types.join(' / ');
@@ -53,6 +56,17 @@ module.exports = {
 			else if (hint === 'Spe: ') hintData = mon.baseStats.spe;
 			else return Bot.say(room, 'Error occurred.');
 		} else if (hint === 'A Pokemon!') hintData = '';
-		Bot.say(room, '/hangman create ' + mon.name + ', ' + hint + (hintData || ''));
+		else if (hint === 'Pokémon/Move/Ability/Item!') {
+			hintData = '';
+			sol = [
+				filDex.map(mon => pokedex[mon].name),
+				Object.values(data.moves)
+					.filter(move => move.num > 0 && !move.isZ && !move.isMax && move.isNonstandard !== 'LGPE' && move.isNonstandard !== 'CAP')
+					.map(move => move.name),
+				data.abilities,
+				Object.values(data.items).map(item => item.name)
+			].flat().random();
+		}
+		Bot.say(room, '/hangman create ' + sol + ', ' + hint + (hintData || ''));
 	}
 };

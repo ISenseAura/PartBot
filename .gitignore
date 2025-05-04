@@ -1,6 +1,7 @@
 # General files
 node_modules/
 package-lock.json
+.idea
 
 # Data files
 /data/BACKUPS/**

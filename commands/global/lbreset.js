@@ -11,8 +11,9 @@ module.exports = {
 		}
 		Bot.log(JSON.stringify(Bot.rooms[room].lb.users));
 		Bot.log(`^ ${Bot.rooms[room].title} points were reset.`);
-		Bot.rooms[room].lb.users = {};
-		tools.updateLB(room);
+		const LB = Bot.rooms[room].lb;
+		Object.keys(LB.users).forEach(u => delete LB.users[u]);
+		tools.updateLB();
 		return Bot.say(room, 'Points were reset!');
 	}
 };

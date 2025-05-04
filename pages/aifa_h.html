@@ -323,7 +323,7 @@
 				for (let i = 0; i < num; i++) info.nodes.push(`V${i + 1}`);
 				let allEdges = [];
 				for (let i = 1; i <= num; i++) for (let j = i + 1; j <= num; j++) allEdges.push([i, j]);
-				$('edges').innerHTML = allEdges.map(bw => `<label for="V${bw[0]}|V${bw[1]}">V${bw[0]}-V${bw[1]}</label>: <input type="text" name="edge" id="V${bw[0]}|V${bw[1]}" value="-"	placeholder="Length" required />`).join('<br />');
+				$('edges').innerHTML = allEdges.map(bw => `<label for="V${bw[0]}|V${bw[1]}">V${bw[0]}-V${bw[1]}</label>: <input type="text" name="edge" id="V${bw[0]}|V${bw[1]}" value="-"	placeholder="Length" required />`).join('<br/>');
 				$('edgestitle').hidden = false;
 				$('graphbuttons').hidden = false;
 				$('vehicles').style.visibility = 'hidden';
@@ -363,7 +363,7 @@
 					info.EVs = {};
 					for (let i = 0; i < num; i++) info.EVs[`P${i + 1}`] = {};
 				}
-				$('evs').innerHTML = Object.keys(info.EVs).map(ev => `<fieldset><legend>${ev}</legend><div class="inline"><label for="${ev}source">Source</label>: <input type="text" list="${ev}sourcelist" id="${ev}source" class="inputcell" required /><datalist id="${ev}sourcelist">${info.nodes.map(node => `<option value="${node}" />`).join('')}</datalist></div><div class="inline"><label for="${ev}dest">Target</label>: <input type="text" list="${ev}destlist" id="${ev}dest" class="inputcell" required /><datalist id="${ev}destlist">${info.nodes.map(node => `<option value="${node}" />`).join('')}</datalist></div><br /><div class="inline"><label for="${ev}speed">Speed</label>: <input type="text" id="${ev}speed" class="nums" required /></div><br /><div class="inline"><label for="${ev}max">Battery Capacity</label>: <input type="text" id="${ev}max" class="nums" required /></div><div class="inline"><label for="${ev}init">Current Battery</label>: <input type="text" id="${ev}init" class="nums" required /></div><br /><div class="inline"><label for="${ev}charge">Charging Rate</label>: <input type="text" id="${ev}charge" class="nums" required /></div><div class="inline"><label for="${ev}discharge">Discharging Rate</label>: <input type="text" id="${ev}discharge" class="nums" required /></div></fieldset>`).join('<br />');
+				$('evs').innerHTML = Object.keys(info.EVs).map(ev => `<fieldset><legend>${ev}</legend><div class="inline"><label for="${ev}source">Source</label>: <input type="text" list="${ev}sourcelist" id="${ev}source" class="inputcell" required /><datalist id="${ev}sourcelist">${info.nodes.map(node => `<option value="${node}" />`).join('')}</datalist></div><div class="inline"><label for="${ev}dest">Target</label>: <input type="text" list="${ev}destlist" id="${ev}dest" class="inputcell" required /><datalist id="${ev}destlist">${info.nodes.map(node => `<option value="${node}" />`).join('')}</datalist></div><br/><div class="inline"><label for="${ev}speed">Speed</label>: <input type="text" id="${ev}speed" class="nums" required /></div><br/><div class="inline"><label for="${ev}max">Battery Capacity</label>: <input type="text" id="${ev}max" class="nums" required /></div><div class="inline"><label for="${ev}init">Current Battery</label>: <input type="text" id="${ev}init" class="nums" required /></div><br/><div class="inline"><label for="${ev}charge">Charging Rate</label>: <input type="text" id="${ev}charge" class="nums" required /></div><div class="inline"><label for="${ev}discharge">Discharging Rate</label>: <input type="text" id="${ev}discharge" class="nums" required /></div></fieldset>`).join('<br/>');
 				$('vehtitle').hidden = false;
 				$('evbuttons').hidden = false;
 			}
@@ -492,20 +492,20 @@
 		<div id="graph">
 			<h2>Nodes</h2>
 			How many nodes does the graph have? <input type="text" id="nodenum" value="5" placeholder="#" required />&nbsp;&nbsp;<button onclick="setnodes()">Set</button>
-			<br />
+			<br/>
 			<h2 id="edgestitle" hidden>Edges</h2>
 			<div id="edges"></div>
-			<br />
+			<br/>
 			<span id="graphbuttons" hidden><button name="Generate!" onclick="generate()">Generate map!</button></span>
 		</div>
 		<div id="vehicles" style="visibility: hidden;">
 			<h2>Vehicles</h2>
 			How many vehicles does the simulation have? <input type="text" id="evnum" value="3" placeholder="#" required />&nbsp;&nbsp;<button onclick="setevs()">Set</button>
-			<br />
+			<br/>
 			<h2 id="vehtitle" /*hidden*/>Details</h2>
 			<div id="evs">
 			</div>
-			<br />
+			<br/>
 			<span id="evbuttons" hidden><button name="run" id="usrRun" onclick="run()">Run simulation!</button></span>
 		</div>
 		<div id="sampleRun" style="visibility: hidden;">

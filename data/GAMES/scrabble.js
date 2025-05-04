@@ -97,6 +97,7 @@ class Scrabble {
 		};
 		Object.keys(this.letters).forEach(letter => this.bag.push(...Array.from({ length: this.letters[letter] }, () => letter)));
 		this.bag.shuffle();
+		if (Bot.AFD) this.bag = 'NEVERGONNAGIVEYOUUP NEVERGONNALETYOUDOWN NEVERGONNARUNAROUNDAND DESERTYOU'.split('');
 		this.spectators = [];
 		if (restore) Object.keys(restore).forEach(key => this[key] = restore[key]);
 		if (this.modded) this.mod(this.modded);
@@ -179,6 +180,7 @@ class Scrabble {
 			}
 			if (!placed.length) return reject('Must play at least one letter');
 			const hand = this.getPlayer(this.turn).tiles.slice(), playedClone = playedLetters.slice();
+			const playedWords = [];
 			let tmp;
 			while (playedClone.length) {
 				if (!hand.remove(tmp = playedClone.shift())) return reject(`Insufficient tiles for: ${tmp}`);
@@ -239,9 +241,9 @@ class Scrabble {
 				thisc *= mult;
 				if (typeof bonus === 'number') thisc *= bonus;
 				else if (Array.isArray(bonus)) thisc = Number(thisc * bonus[0] + bonus[1]);
-				return thisc;
+				return { score: thisc, word };
 			});
-			let score = iScores.reduce((a, b) => a + b, 0);
+			let score = iScores.reduce((a, b) => a + b.score, 0);
 			if (!score) return reject('The first word must be at least two tiles long');
 			const player = this.getPlayer(this.turn), bingo = playedLetters.length === 7;
 			if (bingo) score += 50;
@@ -261,6 +263,7 @@ class Scrabble {
 	exchange (letters) {
 		return new Promise((resolve, reject) => {
 			if (!this.started) return reject('Hasn\'t started');
+			if (Bot.AFD) return reject('Hi sorry I think I have a pollen allergy');
 			const player = this.getPlayer(this.turn);
 			if (typeof letters === 'string') letters = letters.toUpperCase().replace(/[^A-Z ]/g, '').split('');
 			const clone = player.tiles.slice();
@@ -298,7 +301,17 @@ class Scrabble {
 		mod = toID(mod);
 		let modifier = Object.keys(WORDS.mods).find(k => k === mod);
 		if (!modifier) modifier = Object.keys(WORDS.mods).find(k => WORDS.mods[k].aliases?.includes(mod));
-		if (modifier) return this.modded = modifier;
+		if (modifier) {
+			const mod = WORDS.mods[modifier];
+			if (mod.letters) {
+				this.letters = mod.letters;
+				this.bag = [];
+				Object.keys(this.letters).forEach(letter => this.bag.push(...Array.from({ length: this.letters[letter] }, () => letter)));
+				this.bag.shuffle();
+			}
+			if (mod.points) this.points = mod.points;
+			return this.modded = modifier;
+		}
 		else return false;
 	}
 	log () {

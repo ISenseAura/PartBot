@@ -44,8 +44,8 @@ class Othello {
 			}
 			str += `</tr>`;
 		}
-		str += `</table><br /><h1>${wCount}W / ${bCount}B</h1>`;
-		if (player && !ended) str += `<br /><h2>Current turn: ${this.turn === 'W' ? 'White' : 'Black'}</h2>`;
+		str += `</table><br/><h1>${wCount}W / ${bCount}B</h1>`;
+		if (player && !ended) str += `<br/><h2>Current turn: ${this.turn === 'W' ? 'White' : 'Black'}</h2>`;
 		str += '</center>';
 		return str;
 	}

@@ -90,7 +90,7 @@ module.exports = {
 		}
 		const points = Math.round(((elo - 1000) ** 2 / 500 + 300) * difficulty);
 		try {
-			await tools.addPoints(0, challenger, points, 'trickhouse');
+			await tools.addPoints(0, { [challenger]: points }, 'trickhouse', by);
 			const Room = Bot.rooms.trickhouse;
 			const id = cargs.length ? cargs.shift() : null;
 			if (id && Room?.vers?.[id]) {

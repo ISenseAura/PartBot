@@ -1,3 +1,5 @@
+const origindb = require('origindb');
+
 /************************
 *        Utility        *
 ************************/
@@ -8,13 +10,13 @@ exports.quoteParse = function (quote, smogon, utg) {
 	const meRegex = new RegExp(`^(\\[(?:\\d{2}:){1,2}\\d{2}\\] |)• ([${ranks.join('')}]?)(\\[[a-zA-Z0-9][^\\]]{0,25}\\]) (.*)$`);
 	const jnlRegex = /^(?:.*? (?:joined|left)(?:; )?){1,2}$/;
 	const rawRegex = /^(\[(?:\d{2}:){1,2}\d{2}\] |)(.*)$/;
-	return quote.split('\n').map((line, test) => {
+	return quote.split(/ ?\n ?/).map((line, test) => {
 		// eslint-disable-next-line max-len
 		if (test = line.match(chatRegex)) return smogon ? `[SIZE=1][COLOR=rgb(102, 102, 102)]${test[1]}[/COLOR][/SIZE][SIZE=2][COLOR=rgb(102, 102, 102)] ${test[2]}[/COLOR][COLOR=rgb(${tools.HSLtoRGB(...tools.HSL(test[3]).hsl).join(', ')})][B]${test[3]}[/B]:[/COLOR] ${test[4]}[/SIZE]` : `<div class="chat chatmessage-a" style="padding:3px 0;"><small>${test[1] + test[2]}</small><span class="username">${utg ? `<username>${test[3]}:</username>` : tools.colourize(`${test[3]}:`)}</span><em> ${test[4]}</em></div>`;
 		// eslint-disable-next-line max-len
 		else if (test = line.match(meRegex)) return `<div class="chat chatmessage-${toID(test[3])}" style="padding:3px 0;"><small>${test[1]}</small>${tools.colourize('• ', test[3])}<em><small>${test[2]}</small><span class="username">${test[3].slice(1, -1)}</span><i> ${test[4]}</i></em></div>`;
 		// eslint-disable-next-line max-len
-		else if (test = line.match(jnlRegex)) return `<div class="message" style="padding:3px 0;"><small style="color: #555555"> ${test[0]}<br /></small></div>`;
+		else if (test = line.match(jnlRegex)) return `<div class="message" style="padding:3px 0;"><small style="color: #555555"> ${test[0]}<br/></small></div>`;
 		// eslint-disable-next-line max-len
 		else if (test = line.match(rawRegex)) return `<div class="chat chatmessage-partbot" style="padding:3px 0;"><small>${test[1]}</small>${test[2]}</div>`;
 	}).join(smogon ? '\n' : '');
@@ -140,7 +142,7 @@ exports.listify = function (array, delim = ', ', concat = ' and ') {
 };
 
 exports.uploadToPastie = function (text) {
-	return axios.post('https://pastie.io/documents', text).then(res => `https://pastie.io/raw/${res.data}`);
+	return axios.post('https://pastie.io/documents', text).then(res => `https://pastie.io/raw/${res.data.key}`);
 };
 
 exports.warmup = function (room, commandName) {
@@ -529,6 +531,24 @@ exports.deepClone = function (aObject) {
 	return bObject;
 };
 
+exports.levenshtein = function (a, b) {
+	const d = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+	for (let i = 0; i < a.length + 1; i++) d[i][0] = i;
+	for (let j = 0; j < b.length + 1; j++) d[0][j] = j;
+	for (let i = 0; i < a.length; i++) {
+		for (let j = 0; j < b.length; j++) {
+			let cost;
+			if (a[i] === b[j]) cost = 0;
+			else cost = 1;
+			d[i + 1][j + 1] = Math.min(d[i][j + 1] + 1, d[i + 1][j] + 1, d[i][j] + cost);
+			if (i > 1 && j > 1 && a[i] === b[j - 1] && a[i - 1] === b[j]) {
+				d[i + 1][j + 1] = Math.min(d[i + 1][j + 1], d[i - 1][j - 1] + 1);
+			}
+		}
+	}
+	return d[a.length][b.length];
+};
+
 exports.getAlts = async function alts (user, trace = 1) {
 	trace = 1;
 	if (typeof user === 'object') user = user.name || user.username || user.userid || user.id;
@@ -585,48 +605,69 @@ exports.updateShops = function (...shops) {
 	});
 };
 
+const pointsDB = origindb('data/POINTS');
+
 exports.loadLB = function (...rooms) {
 	if (!rooms.length) rooms = fs.readdirSync('./data/POINTS').map(room => room.slice(0, room.length - 5));
 	rooms.map(room => room.toLowerCase().replace(/[^a-z0-9-]/g, ''));
 	rooms.forEach(room => {
 		if (!Bot.rooms[room]) return console.log(`Not in ${room} to load the leaderboard.`);
-		fs.readFile(`./data/POINTS/${room}.json`, 'utf8', (err, file) => {
-			if (err) return;
-			const dat = JSON.parse(file);
-			Bot.rooms[room].lb = dat;
-			console.log(`Loaded the ${Bot.rooms[room].title} leaderboard.`);
-		});
+		if (!Bot.rooms[room].points) return Bot.log(`Trying to load a leaderboard in ${room} without a points object.`);
+		const roomDB = pointsDB(room);
+		Bot.rooms[room].lb = { points: Bot.rooms[room].points, users: roomDB.object() };
+		// fs.readFile(`./data/POINTS/${room}.json`, 'utf8', (err, file) => {
+		// 	if (err) return;
+		// 	const dat = JSON.parse(file);
+		// 	Bot.rooms[room].lb = dat;
+		// 	console.log(`Loaded the ${Bot.rooms[room].title} leaderboard.`);
+		// });
 	});
 };
 
 exports.updateLB = function (...rooms) {
-	if (!rooms.length) rooms = fs.readdirSync('./data/POINTS').map(room => room.slice(0, room.length - 5));
-	rooms.map(room => room.toLowerCase().replace(/[^a-z0-9-]/g, ''));
-	rooms.forEach(room => {
-		if (!Bot.rooms[room]) return console.log(`Not in ${room} to update leaderboard.`);
-		fs.writeFile(`./data/POINTS/${room}.json`, JSON.stringify(Bot.rooms[room].lb, null, 2), (err) => {
-			if (err) return;
-		});
-	});
+	return pointsDB.save();
+	// if (!rooms.length) rooms = fs.readdirSync('./data/POINTS').map(room => room.slice(0, room.length - 5));
+	// rooms.map(room => room.toLowerCase().replace(/[^a-z0-9-]/g, ''));
+	// rooms.forEach(room => {
+	// 	if (!Bot.rooms[room]) return console.log(`Not in ${room} to update leaderboard.`);
+	// 	fs.writeFile(`./data/POINTS/${room}.json`, JSON.stringify(Bot.rooms[room].lb, null, 2), (err) => {
+	// 		if (err) return;
+	// 	});
+	// });
 };
 
-exports.addPoints = function (type, username, points, room) {
+exports.addPoints = function (type, pointsObj, room, by) {
 	return new Promise((resolve, reject) => {
 		if (typeof type !== 'number') return reject(new Error('Type must be a number.'));
-		points = parseInt(points);
-		if (isNaN(points)) return reject(new Error('Points must be a valid number'));
-		const user = toID(username);
 		if (!room || !Bot.rooms[room].lb) return reject(new Error('Invalid room / no leaderboard'));
 		if (type >= Bot.rooms[room].lb.points.length) return reject(new Error('Type is too high!'));
-		if (!Bot.rooms[room].lb.users[user]) {
-			Bot.rooms[room].lb.users[user] = {
-				name: username,
-				points: Array.from({ length: Bot.rooms[room].lb.points.length }).map(t => 0)
-			};
+		const roomDB = pointsDB(room).object();
+		Object.entries(pointsObj).forEach(([username, points]) => {
+			points = parseInt(points);
+			if (isNaN(points)) return reject(new Error('Points must be a valid number'));
+			const user = toID(username);
+			if (!roomDB[user]) {
+				roomDB[user] = {
+					name: username,
+					points: Array.from({ length: Bot.rooms[room].lb.points.length }).fill(0)
+				};
+			}
+			roomDB[user].points[type] += points;
+		});
+		Bot.rooms[room].lb.users = roomDB;
+		// tools.updateLB(room);
+		pointsDB.save();
+		// LNY
+		if (room === 'lunarnewyear') {
+			Object.entries(pointsObj).forEach(([username, points]) => {
+				client.channels.cache.get('1204394501813051412').send(`${Math.abs(points) || 'No'} point${
+					Math.abs(points) === 1 ? ' was' : 's were'
+				} ${
+					points > 0 ? 'added to' : 'removed from'
+				} ${username} by ${by.substr(1)}.`);
+			});
 		}
-		Bot.rooms[room].lb.users[user].points[type] += points;
-		tools.updateLB(room);
-		return resolve(username);
+		return resolve(pointsObj);
 	});
 };
 

@@ -5,7 +5,7 @@ const guildID = '816252178104320011';
 const announcementChannel = client.channels.cache.get('816341849076793394');
 const hintChannel = client.channels.cache.get('816335136035438622');
 const logChannel = client.channels.cache.get('816335564894765109');
-const parentChannel = client.channels.cache.get('816350143938428989');
+const parentChannel = client.channels.cache.get('1130785926843465778');
 
 const IDs = {
 	staff: '816252289953038336',
@@ -74,7 +74,7 @@ module.exports = {
 				id: id,
 				role: role.id,
 				puzzles: {},
-				unlocked: ['1', '2', '3', '4', '5', 'M'],
+				unlocked: ['1', '2', '3', '4', '5'],
 				unsolved: ['1', '2', '3', '4', '5', 'M'],
 				hints: 0
 			};
@@ -153,7 +153,7 @@ module.exports = {
 		team.unlocked = [];
 		const solved = Object.values(team.puzzles).filter(puzzle => puzzle).length;
 		for (let i = 1; i <= 5; i++) team.unlocked.push(String(i));
-		team.unlocked.push('M');
+		if (solved >= 3) team.unlocked.push('M');
 		team.unsolved = team.unlocked.filter(puzzle => team.puzzles[puzzle] === 0);
 		this.save();
 		return true;

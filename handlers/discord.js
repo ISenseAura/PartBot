@@ -22,6 +22,7 @@ exports.handler = async message => {
 				return message.channel.send('ACCESS DENIED.').then(msg => msg.delete({ timeout: 3000 }));
 			}
 			let output = eval(args.join(' '));
+			Bot.lastEvaled = output;
 			switch (typeof output) {
 				case 'object': output = require('util').inspect(output);
 				case 'function': output = output.toString(); break;

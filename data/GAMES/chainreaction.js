@@ -145,6 +145,7 @@ class CR {
 		return [...out, this.display()];
 	}
 	display (filler) {
+		const renderValueAsText = value => Bot.AFD ? [null, '一', '二', '三', '四', '五', '六', '七', '八', '九'][value] : value;
 		// eslint-disable-next-line max-len
 		let html = '<div style="background-color: black;"><center><table style="border-collapse:collapse;border-spacing:0;border-color:#aaa;" border="1">';
 		const a = "25";
@@ -152,7 +153,7 @@ class CR {
 			html += `<tr>`;
 			for (let j = 0; j < this.width; j++) {
 				// eslint-disable-next-line max-len
-				html += `<td width="${a}" height="${a}" style="text-align:center;">${filler ? '' : `<b><button name="send" value="/msgroom ${this.room},/botmsg ${Bot.status.nickName}, ${prefix}chainreaction ${this.room} click ${i} ${j}" style="background:none;border:none;width:100%;height:100%;"${this.board[i][j].col ? ` title="${tools.escapeHTML(this.players[this.colours[this.board[i][j].col]].name)}"` : ''}>`}<span style="color:${this.board[i][j].col};font-family:Verdana;">${this.board[i][j].value || ' '}</span>${filler ? '' : '</button></b>'}</td>`;
+				html += `<td width="${a}" height="${a}" style="text-align:center;">${filler ? '' : `<b><button name="send" value="/msgroom ${this.room},/botmsg ${Bot.status.nickName}, ${prefix}chainreaction ${this.room} click ${i} ${j}" style="background:none;border:none;width:100%;height:100%;"${this.board[i][j].col ? ` title="${tools.escapeHTML(this.players[this.colours[this.board[i][j].col]].name)}"` : ''}>`}<span style="color:${this.board[i][j].col};font-family:Verdana;">${renderValueAsText(this.board[i][j].value) || ' '}</span>${filler ? '' : '</button></b>'}</td>`;
 			}
 			html += '</tr>';
 		}

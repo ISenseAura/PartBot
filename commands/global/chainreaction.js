@@ -1,3 +1,13 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 20;
+const gameName = 'chainreaction';
+const gameTitle = 'Chain Reaction';
+const pointsWin = game => 12 + Math.floor(Object.keys(game.players).length * 1.5);
+const pointsLose = 9;
+*/
+
 function gameTimer (game, turn) {
 	const time = 45;
 	if (!Bot.rooms[game.room]) return;
@@ -28,6 +38,27 @@ module.exports = {
 				if (game.started) return Bot.roomReply(room, by, 'F in being too late.');
 				const pls = Object.keys(game.players);
 				if ((game.beeg ? pls >= 15 : pls >= 8) || pls >= game.height * game.width) return Bot.roomReply(room, by, "Sorry, hit the player cap. ;-;");
+				if (!game.beeg) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const user = toID(by);
+						const userGames = Bot.UGO.object()[user];
+						const played = Number(userGames?.[gameName]) || 0;
+						if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+						if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+						if (!userGames) {
+							const points = {};
+							points[gameName] = 1;
+							Bot.UGO.set(user, points);
+						} else {
+							userGames[gameName] = played + 1;
+							Bot.UGO.save();
+						}
+					}
+					*/
+					// ENDUGOCODE
+				}
 				if (game.addPlayer(by.substr(1))) return Bot.say(room, `${by.substr(1)} joined the game!`);
 				return Bot.roomReply(room, by, "You're already in it. o.o");
 				break;
@@ -36,6 +67,22 @@ module.exports = {
 				if (!Bot.rooms[room].chainreaction) return Bot.roomReply(room, by, 'Nope, no Chain Reaction here.');
 				if (Bot.rooms[room].chainreaction.started) return Bot.roomReply(room, by, 'F in being too late.');
 				if (Bot.rooms[room].chainreaction.removePlayer(by.substr(1))) {
+					if (!Bot.rooms[room].chainreaction.beeg) {
+						// UGOCODE
+						/*
+						if (UGOR(room)) {
+							const users = [by];
+							const UGODB = Bot.UGO.object();
+							users.forEach(u => {
+								u = toID(u);
+								const userGames = (UGODB[u] || {});
+								userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+							});
+							Bot.UGO.save();
+						}
+						*/
+						// ENDUGOCODE
+					}
 					return Bot.say(room, `${by.substr(1)} left the game!`);
 				}
 				return Bot.roomReply(room, by, "Join first, nerd.");
@@ -64,6 +111,7 @@ module.exports = {
 				}
 				Bot.rooms[room].chainreaction = GAMES.create('chainreaction', ...dimensions, room, beeg);
 				Bot.say(room, `A ${beeg ? 'BEEG ' : ''}game of Chain Reaction has been created! Use \`\`${prefix}chainreaction join\`\` to join!`);
+				Bot.say(room, `/notifyrank all, Chain Reaction, A new game of ${beeg ? 'BEEG ' : ''}Chain Reaction has been created!,chainreactionsignup`);
 				break;
 			}
 			case 'start': case 's': {
@@ -97,6 +145,15 @@ module.exports = {
 					const turn = CR.turn;
 					if (winner) {
 						Bot.say(room, `/adduhtml CRGRATZ, Game ended! GG! Congratulations to <font color="${CR.players[winner].col}">@</font>${tools.escapeHTML(CR.players[winner].name)}!`);
+						// UGOCODE
+						/*
+						if (UGOR(room) && !CR.beeg) {
+							const played = Number(Bot.UGO.get(toID(winner))?.[gameName]);
+							if (played <= pointsLimit) awardUGOPoints(pointsWin(CR), [winner]);
+							awardUGOPoints(pointsLose, Object.keys(CR.players).filter(p => winner !== p && !CR.DQs?.includes(p)).filter(p => Number(Bot.UGO.get(p)?.[gameName]) <= pointsLimit));
+						}
+						*/
+						// ENDUGOCODE
 						clearGameTimer(CR);
 						delete Bot.rooms[room].chainreaction;
 					} else {
@@ -136,6 +193,19 @@ module.exports = {
 				if (!(['boardgames'].includes(room) && tools.hasPermission(by, 'gamma', room)) && !tools.hasPermission(by, 'beta', room)) return Bot.roomReply(room, by, 'Access denied.');
 				const CR = Bot.rooms[room].chainreaction;
 				if (!CR) return Bot.say(room, "Didn't have one active anyways.");
+				// UGOCODE
+				/*
+				if (UGOR(room) && !CR.beeg) {
+					const UGODB = Bot.UGO.object();
+					Object.keys(CR.players).forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				clearGameTimer(CR);
 				delete Bot.rooms[room].chainreaction;
 				Bot.say(room, "Game ended!");
@@ -155,6 +225,15 @@ module.exports = {
 				if (!CR.DQs) CR.DQs = [];
 				CR.DQs.push(user);
 				if (CR.order.length < 2) {
+					// UGOCODE
+					/*
+					if (UGOR(room) && !game.beeg) {
+						const played = Number(Bot.UGO.get(toID(CR.order[0]))?.[gameName]);
+						if (played <= pointsLimit) awardUGOPoints(pointsWin(CR), [toID(CR.order[0])]);
+						awardUGOPoints(pointsLose, Object.keys(CR.players).filter(p => winner !== p && !CR.DQs?.includes(p)).filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+					}
+					*/
+					// ENDUGOCODE
 					return CR.end();
 				}
 				return;
@@ -187,6 +266,33 @@ module.exports = {
 				if (!Object.keys(CR.players).includes(ids[0]) && !Object.keys(CR.players).includes(ids[1])) return Bot.say(room, "Neither of those are in the game.");
 				const going = Object.keys(CR.players).includes(ids[1]) ? args[1] : args[0], coming = Object.keys(CR.players).includes(ids[1]) ? args[0] : args[1];
 				if (coming === toID(Bot.status.nickName)) return Bot.say(room, 'NO U');
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const user = toID(coming);
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.say(room, `[[ ]]${user} has already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+					const users = [going];
+					const UGODB = Bot.UGO.object();
+					users.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				CR.players[toID(coming)] = Object.assign({}, CR.players[toID(going)]);
 				CR.players[toID(coming)].name = coming;
 				delete CR.players[toID(going)];

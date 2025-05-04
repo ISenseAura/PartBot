@@ -42,6 +42,10 @@ client.on('ready', () => {
 	const { loadMessages, reactToReacts } = require('./handlers/discord_reacts.js');
 	loadMessages(client).then(() => client.on('messageReactionAdd', (...args) => reactToReacts(...args)));
 });
+client.on('disconnect', e => {
+	Bot.log(e);
+	client.login(config.token);
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

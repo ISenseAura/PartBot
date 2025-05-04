@@ -1,3 +1,13 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 10;
+const gameName = 'mastermind';
+const gameTitle = 'Mastermind';
+const pointsWin = 2;
+const pointsLose = 0;
+*/
+
 module.exports = {
 	help: `Mastermind, the code-breaking game! Type \`\`${prefix}mastermind new (guess limit, optional)\`\` to make a game. Rules: https://docs.google.com/document/u/1/d/e/2PACX-1vRiZyg6D3sg-TS5ya-MOBBvbnM-NuQm_jrkV3hXtzFYnXSV-FnATcLs8LftjKUr4i_yCbIW-eZJppdj/pub`,
 	permissions: 'none',
@@ -18,10 +28,29 @@ module.exports = {
 				const mm = Bot.rooms[room].mastermind;
 				user = toID(by);
 				if (mm[user]) return Bot.roomReply(room, by, `You're already playing one! If you want to end the current one, do \`\`${prefix}mastermind end\`\`.`);
-				if (pm) return Bot.roomReply(room, by, "Can't start one from PMs. o.o");
+				// if (pm) return Bot.roomReply(room, by, "Can't start one from PMs. o.o");
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+				}
+				*/
+				// ENDUGOCODE
+				Bot.say(room, `/sendprivatehtmlbox ${by}, <h2>Psst; in the future use ]mastermind instead! This version is being phased out.</h2>`);
 				let limit;
 				if (args.length) limit = parseInt(args);
-				if (limit && !(limit < 13 && limit > 4)) {
+				if (limit && !(limit < 13 && limit > 3)) {
 					Bot.roomReply(room, by, "Invalid limit; limit has been set to 10.");
 					limit = 10;
 				}
@@ -54,6 +83,14 @@ module.exports = {
 							Bot.say(room, `/changeuhtml MM${user}, <hr/>${tools.escapeHTML(by.substr(1))} is playing a round of Mastermind!<hr/>`);
 							Bot.say(room, `${by.substr(1)} successfully cracked ${mm[user].sol.join('')} in ${mm[user].guesses.length} tr${mm[user].guesses.length === 1 ? 'y' : 'ies'}!`);
 							mm[user].sendPages();
+							// UGOCODE
+							/*
+							if (UGOR(room)) {
+								const played = Number(Bot.UGO.get(user)?.[gameName]);
+								if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(by.substr(1))]);
+							}
+							*/
+							// ENDUGOCODE
 							return delete mm[user];
 							break;
 						}
@@ -61,6 +98,14 @@ module.exports = {
 							Bot.say(room, `/changeuhtml MM${user}, <hr/>${tools.escapeHTML(by.substr(1))} is playing a round of Mastermind!<hr/>`);
 							Bot.say(room, `${by.substr(1)} was unable to crack ${mm[user].sol.join('')} in ${mm[user].guesses.length} tries. ;-;`);
 							mm[user].sendPages();
+							// UGOCODE
+							/*
+							if (UGOR(room)) {
+								const played = Number(Bot.UGO.get(user)?.[gameName]);
+								if (played <= pointsLimit) awardUGOPoints(pointsLose, [by.substr(1)]);
+							}
+							*/
+							// ENDUGOCODE
 							return delete mm[user];
 							break;
 						}
@@ -73,6 +118,8 @@ module.exports = {
 			}
 			case 'setcode': {
 				if (!Bot.rooms[room].mastermind) return Bot.roomReply(room, by, "No games are active.");
+				// UGOCODE
+				// if (room === 'boardgames') return Bot.roomReply(room, by, 'Code setting is disabled during UGO.');
 				const mm = Bot.rooms[room].mastermind;
 				const [target, code] = args.join(' ').split(',').map(toID);
 				if (!target || !/^[0-7]{4}$/.test(code)) return Bot.roomReply(room, by, 'Welp, that wasn\'t a valid code - try again in another match!');

@@ -44,7 +44,8 @@
 			margin: 30px auto;
 		}
 
-		div.code {
+		.code {
+			font-family: monospace;
 			display: inline-block;
 			border: 1px solid rgba(255, 255, 255, 0.02);
 			background: rgba(255, 255, 255, 0.05);
@@ -92,25 +93,88 @@
 </head>
 <body>
 	<h1>RegEx Hunts</h1>
-	<br />
+	<br/>
 	<div class="text">
-		Welcome to RegEx hunts! These are a fairly new type of hunt, and once you get what they mean, they're rather fun. The premise is simple - answer with the shortest RegEx that would match all of the given Pokemon (or moves) - and only the given Pokemon (or moves), no others.
-		<br />
-		<br />
-		First up: what is RegEx? RegEx, in the simplest terms, is a way to find or filter pieces of text. Stuff like 'all things that include an E followed by a C' or 'a vowel followed by two consonants, then a number'. It's an elegant system for searching - even if certain RegExes look scary to the eye.
-		<br />
-		<br />
-		If you're interested in learning the basics of RegEx (it's really easy to learn), you can take a look through these links: 
+		Welcome to RegEx hunts! The premise is simple - answer with the shortest RegEx that would match all the given
+		Pokémon (or moves) - and only the given Pokémon (or moves), no others.
+		<br/>
+		<br/>
+		First up: what is RegEx? RegEx, in the simplest terms, is a way to find or filter pieces of text. Stuff like
+		'all things that include an E followed by a C' or 'a vowel followed by two consonants, then a number'. It's an
+		elegant system for searching - even if certain expressions look scary to the eye.
+		<br/>
+		<br/>
+		If you're interested in learning the basics of RegEx (it's really easy to learn), you can take a look through
+		these links:
 		<div class="links">
 			<a href="https://regexone.com/lesson/introduction_abcs" class="button" target="_blank">RegEx One</a>
 			<a href="http://www.rexegg.com/regex-quickstart.html" class="button" target="_blank">RegEx Quickstart</a>
 		</div>
+		<br/>
+		<br/>
+		You can test out RegEx on PartBot against all Pokémon via the <code>,fn</code> command, or against all moves
+		via the <code>,fm</code> command in DMs with PartBot. Note that all names are stripped of spaces, dashes, and
+		other non-alphanumeric characters (diacritics are replaced with the base letter).
+	</div>
+	<div class="text">
+		<h2>Auto-Formatter</h2>
+		<br/>
+		Type in your regular expression in the box below. This website will re-format it in-browser for you!
+		<br/>
+		<br/>
+		<label for="autoformatter-input">Your expression: </label>
+		<input type="text" id="autoformatter-input" oninput="autoformatInput()" />
+		<div onclick="copyToClipboard()">
+			Output: <code class="code" id="autoformatter-output"></code>&nbsp;<small id="copy">(Click to copy)</small>
+		</div>
+		<script>
+			const charMap = Object.entries({
+				'^': 33,
+				'.': 0,
+				'+': 39,
+				'$': 30,
+				'(': 603,
+				')': 603,
+				'[': 600,
+				']': 600,
+				'{': 69,
+				'}': 69,
+				'?': 609,
+				'\\': 66,
+				'|': 36,
+				':': 606,
+				'-': 63,
+				'*': 9,
+			});
+
+			const inputEl = document.getElementById('autoformatter-input');
+			const outputEl = document.getElementById('autoformatter-output');
+			const copyEl = document.getElementById('copy');
+			function autoformatInput() {
+				const inputExpression = inputEl.value;
+				const reformatted = charMap.reduce((acc, [char, code]) => acc.replaceAll(char, code), inputExpression);
+				outputEl.innerText = reformatted.replace(/[^a-z0-9]/gi, '');
+				copyEl.innerText = '(Click to copy)';
+			}
+			function copyToClipboard() {
+				const content = outputEl.innerText;
+				if (content) {
+					navigator.clipboard.writeText(content);
+					copyEl.innerText = '(Copied!)';
+				} else {
+					copyEl.innerText = '(Write something in the expression box you potato)';
+				}
+			}
+		</script>
 	</div>
 	<div class="text">
 		<h2>Answering</h2>
-		<br />
-		Sadly, we can't let people answer directly with the RegEx. Why? The reason is PS's validator - it removes all punctuation while comparing answers. Which means that ^ha is an acceptable answer for ha.?[^\.!]$. Since that would make it gameable, there's a slight extra rule - replace all punctuation with the corresponding numbers, given below.
-		<br />
+		<br/>
+		Sadly, we can't let people answer directly with the RegEx. Why? The reason is PS's validator - it removes all
+		punctuation while comparing answers. Which means that ^ha is an acceptable answer for ha.?[^\.!]$. Since that
+		would make it gameable, there's a slight extra rule - replace all punctuation with the corresponding numbers,
+		given below. (Also note that we use case-insensitive logic for both PS and PartBot, so case won't matter.)
+		<br/>
 		<table>
 			<tr><td>^     </td><td>33</td></tr>
 			<tr><td>.     </td><td>0</td></tr>
@@ -126,33 +190,96 @@
 			<tr><td>-     </td><td>63</td></tr>
 			<tr><td>*     </td><td>9</td></tr>
 		</table>
-		<br />
+		<br/>
 		For example, <div class="code">^(k|r).*\1$</div> would be answered as <div class="code">33 603 k 36 r 603 0 9 66 1 30</div>.
-		<br />
-		Additionally, whenever there's a list (whether it's of numbers or letters), arrange the terms alphabetically. So a RegEx like <div class="code">(d|ef|bca)</div> would be answered with the code for <div class="code">(bca|d|ef)</div>, which is <div class="code">603 bca 36 d 36 ef 603</div>. Similarly, <div class="code">[ahgcv]</div> would be answered with the code for <div class="code">[acghv]</div>.
+		<br/>
+		Additionally, whenever there's a list (whether it's of numbers or letters), arrange the terms alphabetically.
+		So a RegEx like <div class="code">(d|ef|bca)</div> would be answered with the code for
+		<div class="code">(bca|d|ef)</div>, which is <div class="code">603 bca 36 d 36 ef 603</div>. Similarly,
+		<div class="code">[ahgcv]</div> would be answered with the code for <div class="code">[acghv]</div>.
 	</div>
 	<div class="text">
 		<h2>Examples</h2>
 		<table>
-            <tbody>
+			<tbody>
 				<tr><th>Pokémon</th><th>Matching RegEx</th><th>RegEx Code</th></tr>
-				<tr><td><div class="code">porygon2</div></td><td><div class="code">2</div></td><td><div class="code">2</div></td></tr>
-				<tr><td><div class="code">silvallywater</div></td><td><div class="code">yw</div></td><td><div class="code">yw</div></td></tr>
-				<tr><td><div class="code">entei</div></td><td><div class="code">^en</div></td><td><div class="code">33en</div></td></tr>
-				<tr><td><div class="code">empoleon espeon espurr exploud</div></td><td><div class="code">^e.p</div></td><td><div class="code">33e0p</div></td></tr>
-				<tr><td><div class="code">cyndaquil deoxysdefense</div></td><td><div class="code">y.d</div></td><td><div class="code">y0d</div></td></tr>
-				<tr><td><div class="code">gossifleur igglybuff jigglypuff wigglytuff</div></td><td><div class="code">g.{4}f</div></td><td><div class="code">g069469f</div></td></tr>
-				<tr><td><div class="code">gossifleur igglybuff jigglypuff wigglytuff</div></td><td><div class="code">g....f</div></td><td><div class="code">g0000f</div></td></tr>
-				<tr><td><div class="code">cubchoo dubwool</div></td><td><div class="code">b[cw]</div></td><td><div class="code">b600cw600</div></td></tr>
-				<tr><td><div class="code">articuno pikachuunova unown</div></td><td><div class="code">uno</div></td><td><div class="code">uno</div></td></tr>
-				<tr><td><div class="code">carvanha hawlucha</div></td><td><div class="code">ha$</div></td><td><div class="code">ha30</div></td></tr>
-				<tr><td><div class="code">klink krokorok kyuremblack rapidashgalar rhyperior</div></td><td><div class="code">^(k|r).*\1$</div></td><td><div class="code">33603k36r6030966130</div></td></tr>
-				<tr><td><div class="code">kommoototem krookodile sudowoodo wooloo</div></td><td><div class="code">oo.o</div></td><td><div class="code">oo0o</div></td></tr>
-				<tr><td><div class="code">sudowoodo wooloo</div></td><td><div class="code">o.oo</div></td><td><div class="code">o0oo</div></td></tr>
-				<tr><td><div class="code">beedrillmega dialga</div></td><td><div class="code">d..l.*g</div></td><td><div class="code">d00l09g</div></td></tr>
-				<tr><td><div class="code">dusknoir gardevoir houndour</div></td><td><div class="code">d.*o.r$</div></td><td><div class="code">d09o0r30</div></td></tr> 
+				<tr>
+					<td><div class="code">porygon2</div></td>
+					<td><div class="code">2</div></td>
+					<td><div class="code">2</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">silvallywater</div></td>
+					<td><div class="code">yw</div></td>
+					<td><div class="code">yw</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">entei</div></td>
+					<td><div class="code">^en</div></td>
+					<td><div class="code">33en</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">empoleon espeon espurr exploud</div></td>
+					<td><div class="code">^e.p</div></td>
+					<td><div class="code">33e0p</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">cyndaquil deoxysdefense</div></td>
+					<td><div class="code">y.d</div></td>
+					<td><div class="code">y0d</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">gossifleur igglybuff jigglypuff wigglytuff</div></td>
+					<td><div class="code">g.{4}f</div></td>
+					<td><div class="code">g069469f</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">gossifleur igglybuff jigglypuff wigglytuff</div></td>
+					<td><div class="code">g....f</div></td>
+					<td><div class="code">g0000f</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">cubchoo dubwool</div></td>
+					<td><div class="code">b[cw]</div></td>
+					<td><div class="code">b600cw600</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">articuno pikachuunova unown</div></td>
+					<td><div class="code">uno</div></td>
+					<td><div class="code">uno</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">carvanha hawlucha</div></td>
+					<td><div class="code">ha$</div></td>
+					<td><div class="code">ha30</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">klink krokorok kyuremblack rapidashgalar rhyperior</div></td>
+					<td><div class="code">^(k|r).*\1$</div></td>
+					<td><div class="code">33603k36r6030966130</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">kommoototem krookodile sudowoodo wooloo</div></td>
+					<td><div class="code">oo.o</div></td>
+					<td><div class="code">oo0o</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">sudowoodo wooloo</div></td>
+					<td><div class="code">o.oo</div></td>
+					<td><div class="code">o0oo</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">beedrillmega dialga</div></td>
+					<td><div class="code">d..l.*g</div></td>
+					<td><div class="code">d00l09g</div></td>
+				</tr>
+				<tr>
+					<td><div class="code">dusknoir gardevoir houndour</div></td>
+					<td><div class="code">d.*o.r$</div></td>
+					<td><div class="code">d09o0r30</div></td>
+				</tr>
 			</tbody>
 		</table>
-		<br />
+		<br/>
 	</div>
 </body>

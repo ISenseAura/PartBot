@@ -4,8 +4,8 @@ module.exports = {
 	commandFunction: function (Bot, by, args, client) {
 		return Bot.pm(by, `B-but UGO is over!`);
 		// eslint-disable-next-line no-unreachable
-		const userID = toID(by);
-		if (!tools.hasPermission(by, 'boardgames', 'gamma') || Bot.rooms.boardgames?.users.find(u => toID(u) === userID)?.test(/^ /)) {
+		const uID = toID(by);
+		if (!tools.hasPermission(by, 'boardgames', 'gamma') || Bot.rooms.boardgames?.users.find(u => toID(u) === uID)?.match(/^ /)) {
 			return Bot.pm(by, `Access denied - please ask the auth member to PM me \`\`${prefix}rttt ${toID(by)}\`\``);
 		}
 		const targetID = toID(args.join(''));

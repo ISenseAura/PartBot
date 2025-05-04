@@ -11,6 +11,7 @@ global.toID = function (text) {
 global.axios = require('axios');
 global.config = require('./config.js');
 global.fs = require('fs-extra');
+global.fsp = require('fs').promises;
 global.https = require('https');
 global.levenshtein = require('js-levenshtein');
 global.nunjucks = require('nunjucks');
@@ -70,3 +71,17 @@ global.data.abilities = [...new Set(Object.values(data.pokedex).filter(mon => mo
 	return Object.values(mon.abilities);
 }).reduce((acc, abs) => acc.concat(abs), []))].sort();
 // TODO: Add actual ability data
+
+
+// UGOCODE
+/*
+global.awardUGOPoints = function (amount, users) {
+	if (!Array.isArray(users)) users = [users];
+	if (!users.length) return;
+	if (!amount) return;
+	users.forEach(user => Bot.roomReply('boardgames', user, `You have been awarded ${amount || 'no'} point${amount === 1 ? '' : 's'} on the UGO leaderboard for Board Games.`));
+	if (Bot.rooms.ugo.users.includes('*UGO')) Bot.pm('UGO', `;addpoints ${amount}, Board Games, ${users.join(', ')}`);
+	else client.channels.cache.get('974366677145907220').send(`Psst UGO was offline, please give ${amount || 'no'} point${amount === 1 ? '' : 's'} to ${tools.listify(users)} for Board Games`);
+};
+global.UGOR = room => (['boardgames'].includes(room) || room.startsWith('groupchat-boardgames-')) && !['groupchat-boardgames-scrabbleworkshoppreparation'].includes(room);
+*/

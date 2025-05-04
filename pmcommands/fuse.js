@@ -8,12 +8,13 @@ module.exports = {
 		const toWord = {};
 		toWord[toID(terms[1])] = terms[1];
 		terms = terms.map(term => toID(term));
-		Object.values(data.pokedex).forEach(term => toWord[toID(term.name)] = term.name);
-		Object.values(data.moves).forEach(term => toWord[toID(term.name)] = term.name);
-		Object.values(data.items).map(term => {
-			return term.name.endsWith(' Berry') ? term.name.substr(0, term.name.length - 6) : term.name;
-		}).forEach(term => toWord[toID(term)] = term);
-		data.abilities.forEach(term => toWord[toID(term)] = term);
+		Object.values(data.pokedex).filter(mon => !mon.forme).forEach(term => toWord[toID(term.name)] = term.name);
+		// TODO: Re-enable
+		// Object.values(data.moves).forEach(term => toWord[toID(term.name)] = term.name);
+		// Object.values(data.items).map(term => {
+		// 	return term.name.endsWith(' Berry') ? term.name.substr(0, term.name.length - 6) : term.name;
+		// }).forEach(term => toWord[toID(term)] = term);
+		// data.abilities.forEach(term => toWord[toID(term)] = term);
 		const words = Object.keys(toWord), first = terms[0], second = terms[1], neighbors = (word) => tools.getPorts(word, words)[1];
 		const wordTime = Date.now();
 		const preCheck = tools.getPorts(second, words)[0];

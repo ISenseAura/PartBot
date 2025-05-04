@@ -4,7 +4,7 @@ class ConnectFour {
 		info.rows = parseInt(info.rows);
 		if (info.rows > 10 || info.rows < 5 || !info.rows) info.rows = 6;
 		info.cols = parseInt(info.cols);
-		if (info.cols > 10 || info.cols < 5 || !info.cols) info.cols = 7;
+		if (info.cols > 10 || info.cols < 5 || !info.cols) info.cols = Bot.AFD ? 9 : 7;
 		this.rows = info.rows;
 		this.cols = info.cols;
 		this.turn = 'Y';

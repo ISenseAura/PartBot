@@ -14,16 +14,16 @@ module.exports = {
 				break;
 			}
 			case 'new': case 'n': {
-				if (isPM) return Bot.roomReply(room, by, `Do it in chat you nerd`);
+				// if (isPM) return Bot.roomReply(room, by, `Do it in chat you nerd`);
 				if (LO[user]) return Bot.roomReply(room, by, `Err, you already have a game running. If you want to make a new one, try using \`\`${prefix}lightsout resign\`\` and trying again.`);
-				args = args.join(' ').split(/[, x]/).filter(m => m).map(n => parseInt(n));
+				args = args.join(' ').split(/[, x]+/).filter(m => m).map(n => parseInt(n));
 				let size;
 				if (args.length !== 2 || isNaN(args[0]) || isNaN(args[1])) size = [5, 5];
 				else size = args;
 				if (size[0] >= 21 || size[1] >= 21) return Bot.roomReply(room, by, "WAY TOO LARGE AAAA");
 				if (size[0] < 2 || size[1] < 2) return Bot.roomReply(room, by, "Sorry, I can't allow anything smaller than my IQ.");
 				LO[user] = GAMES.create('lightsout', room, by.substr(1), size);
-				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br /><br /><br />`;
+				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br/><br/><br/>`;
 				Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${by.substr(1)}), ${header + LO[user].boardHTML(true)}`);
 				Bot.say(room, `${by.substr(1)} is playing a game of Lights Out - type \`\`${prefix}lightsout spectate ${by.substr(1)}\`\` to watch!`);
 				return;
@@ -33,7 +33,7 @@ module.exports = {
 				if (!LO[user]) return Bot.roomReply(room, by, "Err, you don't have any running games - try making one?");
 				args = args.map(t => parseInt(t));
 				const out = LO[user].click(...args);
-				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br /><br /><br />`;
+				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br/><br/><br/>`;
 				if (out === null) return Bot.roomReply(room, by, "Use the buttons. O-onegai.");
 				LO[user].ff = false;
 				if (out === false) {
@@ -42,14 +42,14 @@ module.exports = {
 					return;
 				}
 				if (out === true) {
-					Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${by.substr(1)}), ${header + LO[user].boardHTML()}<br /><br /><h1 style="text-align: center;">Done! Congratulations!</h1>`);
+					Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${by.substr(1)}), ${header + LO[user].boardHTML()}<br/><br/><h1 style="text-align: center;">Done! Congratulations!</h1>`);
 					LO[user].spectators.forEach(p => Bot.say(room, `/sendhtmlpage ${p}, Lights Out (${by.substr(1)}), ${header + LO[user].boardHTML()}`));
 					if (LO[user].size.reduce((a, b) => a * b, 1) < 25) Bot.roomReply(room, by, `You solved it in ${LO[user].moves.length} moves! (My solution was ${LO[user].soln.length} moves)`);
 					else {
-						Bot.say(room, `/adduhtml Lights Out @ ${Date.now()}, ${LO[user].boardHTML(false, LO[user].problem, true)}`);
+						Bot.say(room, `/adduhtml Lights Out @ ${Date.now()}, ${LO[user].boardHTML(false, LO[user].problem, true, true)}`);
 						Bot.say(room, `${by.substr(1)} solved this in ${LO[user].moves.length} moves! (My solution was ${LO[user].soln.length} moves)`);
 					}
-					const smugUsers = ['asxier', 'aegii', 'partoru', 'tanpat'];
+					const smugUsers = ['asxier', 'aegii', 'partoru', 'tanpat', 'ahelpfulrayquaza'];
 					if (smugUsers.includes(user) && LO[user].soln.length < LO[user].moves.length) Bot.roomReply(room, by, `PFFFT IMAGINE LOSING TO A BOT`);
 					delete LO[user];
 					return;
@@ -67,7 +67,7 @@ module.exports = {
 				if (LO[player].size.reduce((a, b) => a * b, 1) < 25) return Bot.roomReply(room, by, "Due to flooding, spectating has been disabled for smaller games.");
 				LO[player].spectators.push(user);
 				Bot.roomReply(room, by, `You're now spectating ${LO[player].name}'s game!`);
-				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[player].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[player].moves.length} moves</div><br /><br /><br />`;
+				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[player].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[player].moves.length} moves</div><br/><br/><br/>`;
 				Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${player}), ${header + LO[player].boardHTML()}`);
 				break;
 			}
@@ -87,7 +87,7 @@ module.exports = {
 			case 'rejoin': case 'rj': {
 				if (args.length) user = toID(args.join(''));
 				if (!LO[user]) return Bot.roomReply(room, by, `Could not join ${user}'s game.`);
-				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br /><br /><br />`;
+				const header = `<div style="display: inline-block; float: left; font-weight: bold;">My Solution: ${LO[user].soln.length} moves</div><div style="display: inline-block; float: right; font-weight: bold;">Moves Made: ${LO[user].moves.length} moves</div><br/><br/><br/>`;
 				if (user === toID(by)) return Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${by.substr(1)}), ${header + LO[user].boardHTML(true)}`);
 				if (LO[user].spectators.includes(toID(by))) return Bot.say(room, `/sendhtmlpage ${by}, Lights Out (${player}), ${header + LO[player].boardHTML()}`);
 				return Bot.roomReply(room, by, "Err, you werent' a spectator there.");

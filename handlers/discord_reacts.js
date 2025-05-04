@@ -21,6 +21,7 @@ exports.reactToReacts = (reaction, user) => {
 };
 
 exports.loadMessages = async client => {
+	return;
 	await client.channels.cache.get('766946356018413588').messages.fetch();
 	await client.channels.cache.get('952343311182602290').messages.fetch();
 };

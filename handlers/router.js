@@ -1,3 +1,7 @@
+const path = require('path');
+
+// TODO: Use a proper router for this
+
 module.exports = {
 	get: function (req, res) {
 		const args = req.url.split('/');
@@ -5,7 +9,7 @@ module.exports = {
 		if (!args[0]) return res.redirect('/home');
 		if (Bot.AFD && Math.random() < 0.3) return res.redirect(`https://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtu.be`);
 		switch (args[0].toLowerCase()) {
-			case 'chat-ai-policy': case 'cv': case 'home': case 'hypnosis': case 'hypnosis': case 'tic-tac-toe': {
+			case 'chat-ai-policy': case 'cv': case 'home': case 'hypnosis': case 'tic-tac-toe': {
 				fs.readFile(`./pages/${args[0]}.html`, 'utf8', (err, file) => {
 					if (err) {
 						Bot.log(err);
@@ -18,8 +22,8 @@ module.exports = {
 			case 'aifa': {
 				if (!args[1]) return res.send(`Which mode? Try <a href="${websiteLink}/aifa/heuristic">this</a>.`);
 				switch (toID(args.slice(1).join(''))) {
-					case 'heuristic': return res.sendFile(`${__dirname}/pages/aifa_h.html`);
-					case 'simple': return res.sendFile(`${__dirname}/pages/aifa_s.html`);
+					case 'heuristic': return res.sendFile(path.join(__dirname, '..', 'pages', 'aifa_h.html'));
+					case 'simple': return res.sendFile(path.join(__dirname, '..', 'pages', 'aifa_s.html'));
 					default: return res.send(`?`);
 				}
 			}
@@ -56,6 +60,9 @@ module.exports = {
 				});
 				break;
 			}
+			case 'koala': {
+				return res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+			}
 			case 'othello': {
 				if (!args[1]) return res.send("Err, it looks like you forgot to specify the game code, sorry.");
 				if (/[^A-Za-z0-9_-]/.test(args[1])) return res.send("Invalid game code.");
@@ -87,6 +94,15 @@ module.exports = {
 				});
 				break;
 			}
+			case 'qfa': {
+				const name = args[1] || 'home';
+				if (name === 'constructor') return res.send('Nerd');
+				fs.readFile(`./pages/puzzles/${name}.html`, 'utf8', (err, file) => {
+					if (err) return res.send(`Sorry, that wasn't a puzzle! <small>Or was it?</small>`);
+					res.send(file);
+				});
+				break;
+			}
 			case 'quotes': {
 				if (!args[1]) return res.send(`Hi, you'll need to specify the room! Simply go to ${websiteLink}/quotes/(room)!`);
 				const room = args.slice(1).join('').toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -101,11 +117,12 @@ module.exports = {
 							Bot.log(e);
 							return res.send(e.message);
 						}
+						// TODO: Use nunjucks
 						fs.readFile(`./pages/quotes.html`, 'utf8', (err, html) => {
 							if (err) return res.send(err.message);
 							const quoteHtml = JSON.parse(dt).quotes
 								.map((q, i) => `<span class="num">${i + 1})</span><div class="quote">${tools.quoteParse(q)}</div>`)
-								.join('<hr />');
+								.join('<hr/>');
 							return res.send(html.replace('###QUOTEINFO###', quoteHtml));
 						});
 					});
@@ -131,7 +148,7 @@ module.exports = {
 			}
 			case 'public': {
 				try {
-					res.sendFile(`${__dirname}/${args.join('/').replace(/(?:"|%22)$/, '')}`);
+					res.sendFile(path.join(__dirname, '..', ...args));
 				} catch (e) {
 					// Bot.log(e);
 				}

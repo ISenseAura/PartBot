@@ -3,7 +3,6 @@
 const axios = require('axios');
 const util = require('util');
 const https = require('https');
-const url = require('url');
 const EventEmitter = require('events');
 const WebSocketClient = require('websocket').client;
 
@@ -18,10 +17,10 @@ class Client extends EventEmitter {
 		this.opts = {
 			server: 'sim3.psim.us',
 			serverid: 'showdown',
-			port: 80,
+			port: 443,
 			secprotocols: [],
 			connectionTimeout: 2 * 60 * 1000,
-			loginServer: 'https://play.pokemonshowdown.com/~~showdown/action.php',
+			loginServer: 'https://play.pokemonshowdown.com/action.php',
 			nickName: null,
 			pass: null,
 			avatar: null,
@@ -167,6 +166,7 @@ Client.prototype.connect = function (retry) {
 			this.debug('Connection closed: ' + util.inspect(arguments));
 			this.connection = null;
 			this.status.connected = false;
+			// this.removeAllListeners();
 			this.emit('disconnect', 0);
 			clearInterval(this._spacer);
 			if (!this.closed && this.opts.autoReconnect) {
@@ -184,7 +184,7 @@ Client.prototype.connect = function (retry) {
 	const id = ~~(Math.random() * 900) + 100;
 	const chars = 'abcdefghijklmnopqrstuvwxyz0123456789_'.split('');
 	const str = Array.from({ length: 8 }).map(() => chars.random()).join('');
-	const conStr = `ws://${this.opts.server}:${this.opts.port}/showdown/${id}/${str}/websocket`;
+	const conStr = `wss://${this.opts.server}${this.opts.port ? `:${this.opts.port}` : ''}/showdown/${id}/${str}/websocket`;
 	this.debug(`Connecting to ${conStr} - secondary protocols: ${util.inspect(this.opts.secprotocols)}`);
 	webSocket.connect(conStr, this.opts.secprotocols);
 };
@@ -241,7 +241,7 @@ Client.prototype.rename = async function (nick, pass) {
 			this.debug(`Retrying login in ${this.opts.retryLogin / 1000} seconds...`);
 			setTimeout(() => this.rename(nick, pass), this.opts.retryLogin);
 		}
-		this.emit('renamefailure', err);
+		this.emit('loginfailure', err);
 	}
 };
 
@@ -404,9 +404,6 @@ Client.prototype.receiveLine = function (room, message, isIntro) {
 			if (!this.rooms[room]) {
 				this.rooms[room] = { rank: false, users: [] };
 				// if (this.baseAuth[room]) this.rooms[room].auth = Object.assign({}, this.baseAuth[room]);
-				tools.loadShops(room);
-				tools.loadLB(room);
-				this.jpcool[room] = {};
 			}
 			this.send(`|/cmd roominfo ${room}`);
 			this.emit('joinRoom', room);
@@ -493,8 +490,12 @@ Client.prototype.receiveLine = function (room, message, isIntro) {
 			this.emit('updatechallenges', larg.slice(1).join('|'));
 			break;
 		}
+		case 'uhtml': {
+			this.emit('uhtml', room, larg[1], larg.slice(2).join('|'), isIntro);
+			break;
+		}
 		default: {
-			this.emit('other', room, larg.join('|'));
+			this.emit('other', room, larg.join('|'), isIntro);
 			break;
 		}
 	}

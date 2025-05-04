@@ -1,56 +1,56 @@
 [
 	{
 		"index": "1",
-		"title": "A Slice of the Action",
-		"id": "asliceoftheaction",
+		"title": "Dated",
+		"id": "dated",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982899869758922802/A_Slice_of_the_Action.pdf",
-		"aliases": ["scyther"],
-		"solution": "AVERAGE"
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132305023339069461/Dated.pdf",
+		"aliases": [],
+		"solution": "NEUTRON"
 	},
 	{
 		"index": "2",
-		"title": "Bridge of Stars",
-		"id": "bridgeofstars",
+		"title": "Magic",
+		"id": "magic",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982679066714992670/Bridge_of_Stars.pdf",
-		"aliases": ["empoleon"],
-		"solution": "CRESCENT"
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132305024865816656/Magic.pdf",
+		"aliases": [],
+		"solution": "LOVING"
 	},
 	{
 		"index": "3",
-		"title": "Color Coded",
-		"id": "colorcoded",
+		"title": "Monochrome",
+		"id": "monochrome",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982682131912347668/Color_Coded.pdf",
-		"aliases": ["phantump"],
-		"solution": "SEA LEMON"
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132305024467345438/Monochrome.pdf",
+		"aliases": [],
+		"solution": "WALLOW"
 	},
 	{
 		"index": "4",
-		"title": "New Species",
-		"id": "newspecies",
+		"title": "Statistical",
+		"id": "statistical",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982679068052979813/New_Species.pdf",
-		"aliases": ["regidrago"],
-		"solution": "WOODSHEDS"
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132327246129020979/Statistical.pdf",
+		"aliases": [],
+		"solution": "SPLASHY"
 	},
 	{
 		"index": "5",
-		"title": "Rate My Team",
-		"id": "ratemyteam",
+		"title": "Triplicate",
+		"id": "triplicate",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982709355801620491/Rate_My_Team.pdf",
-		"aliases": ["spinda"],
-		"solution": "RUBBLE"
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132305023716564992/Triplicate.pdf",
+		"aliases": [],
+		"solution": "TEASE"
 	},
 	{
 		"index": "M",
-		"title": "Purification",
-		"id": "purification",
+		"title": "Evolutionary Troubles",
+		"id": "evolutionarytroubles",
 		"embedFields": [],
-		"url": "https://cdn.discordapp.com/attachments/816341849076793394/982679075963408384/Purification_Meta.pdf",
+		"url": "https://cdn.discordapp.com/attachments/735911891603292262/1132305024123404341/Evolutionary_Troubles_META.pdf",
 		"aliases": ["meta"],
-		"solution": "SHINE LIGHT"
+		"solution": "AN EVERSTONE'S THROW AWAY"
 	}
 ]

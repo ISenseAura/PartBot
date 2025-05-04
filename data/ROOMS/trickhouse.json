@@ -7,5 +7,12 @@
 	"ignore": true,
 	"aliases": [
 		"th"
+	],
+	"points": [
+		[
+			"Point",
+			"Points",
+			"P"
+		]
 	]
 }

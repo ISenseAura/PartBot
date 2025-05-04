@@ -1,3 +1,13 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 20;
+const gameName = 'battleship';
+const gameTitle = 'Battleship';
+const pointsWin = 8;
+const pointsLose = 5;
+*/
+
 function gameTimer (game, turn) {
 	const time = 60;
 	if (!Bot.rooms[game.room]) return;
@@ -117,7 +127,7 @@ function runMoves (run, info, game) {
 			Bot.say(room, `/sendhtmlpage ${game.B.id}, Battleship + ${room} + ${id}, <center><h1>Resigned.</h1>${game.boardHTML().map(boards => boards[1]).map((board, i) => {
 				return `<div style="display:inline-block;padding:10px;">${tools.colourize(game['AB'[i]].name)}<br/><br/>${board}</div>`;
 			}).join('')}</center>`);
-			Bot.say(room, `${players[loser]} resigned.`);
+			Bot.say(room, `${players[winner]} won by forfeit!`);
 			delete Bot.rooms[room].battleship[id];
 			sendEmbed(room, winner, players, boards);
 			return;
@@ -148,7 +158,7 @@ module.exports = {
 				const id = Date.now();
 				Bot.rooms[room].battleship[id] = GAMES.create('battleship', id, room, {});
 				Bot.say(room, `/adduhtml BATTLESHIP-${id}, <hr/><h1>Battleship Signups have begun!</h1><button name="send" style="width:50px" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room}, join ${id} A">A</button>&nbsp;&nbsp;<button name="send" style="width:50px" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room}, join ${id} B">B</button><hr/>`);
-				Bot.say(room, '/notifyrank all, Battleship, A new game of Battleship has been created!, A new game of Battleship has been created.');
+				Bot.say(room, '/notifyrank all, Battleship, A new game of Battleship has been created!,battleshipsignup');
 				return;
 				break;
 			}
@@ -191,6 +201,24 @@ module.exports = {
 				if (game[side].id) return Bot.roomReply(room, by, "Sorry, already taken!");
 				const other = side === 'A' ? 'B' : 'A';
 				if (game[other].id === user) return Bot.roomReply(room, by, "~~You couldn't find anyone else to fight you? __Really__?~~");
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+				}
+				*/
+				// ENDUGOCODE
 				Bot.say(room, `${by.substr(1)} joined Battleship (#${id}) as player ${side === 'A' ? 'A' : 'B'}!${rand ? ' (random)' : ''}`);
 				runMoves('join', { user: by.substr(1), side: side }, game);
 				break;
@@ -302,6 +330,15 @@ module.exports = {
 					clearGameTimer(game);
 					Bot.say(room, `/adduhtml Battleship-log-${room}-${id},<hr/>${tools.colourize(by.substr(1))} ${res ? `hit the ${res.ship}${res.ko ? ' and knocked it out!' : '!'}` : 'missed.'}<hr/>`);
 					if (res.over) {
+						// UGOCODE
+						/*
+						if (UGOR(room)) {
+							const played = Number(Bot.UGO.get(user)?.[gameName]);
+							if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(game[res.over].name)]);
+							awardUGOPoints(pointsLose, [game[game.other(res.over)].name]);
+						}
+						*/
+						// ENDUGOCODE
 						runMoves('end', res.over, game);
 					} else {
 						gameTimer(game, game[game.other(side)].name);
@@ -337,7 +374,35 @@ module.exports = {
 				cargs = cargs.map(carg => carg.trim());
 				const users = cargs.map(carg => toID(carg));
 				if (users.includes(game.A.id) && users.includes(game.B.id) || !users.includes(game.A.id) && !users.includes(game.B.id)) return Bot.say(room, 'Those users? Something\'s wrong with those...');
-				if ([game.A.id, game.B.id].includes(toID(by)) && !tools.hasPermission(by, 'coder')) return Bot.say(room, "Hah! Can't sub yourself out.");
+				if ([game.A.id, game.B.id].includes(toID(by)) && !tools.hasPermission(by, 'coder')) return Bot.say(room, "Hah! Can't sub yourself out."); // UGOCODE beta -> coder
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const coming = users.find(u => ![game.A.id, game.B.id].includes(u)), going = users.find(u => [game.A.id, game.B.id].includes(u));
+					const user = coming;
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.say(room, `[[ ]]${user} has already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+					const lusers = [going];
+					const UGODB = Bot.UGO.object();
+					lusers.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				// ENDUGOCODE
+				*/
 				let subbed, ex, add;
 				if (users.includes(game.A.id)) {
 					subbed = 'A';
@@ -397,6 +462,20 @@ module.exports = {
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				if (!game.started) Bot.say(room, `/changeuhtml BATTLESHIP-${id}, <hr/>Ended. :(<hr/>`);
 				clearGameTimer(game);
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const users = [game.A.id, game.B.id].filter(t => t);
+					const UGODB = Bot.UGO.object();
+					users.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				delete Bot.rooms[room].battleship[id];
 				fs.unlink(`./data/BACKUPS/battleship-${room}-${id}.json`, () => {});
 				return Bot.say(room, `Welp, ended Battleship#${id}.`);
@@ -412,6 +491,20 @@ module.exports = {
 				const game = Bot.rooms[room].battleship[id];
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				if (!game.started) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const users = [game.A.id, game.B.id].filter(t => t);
+						const UGODB = Bot.UGO.object();
+						users.forEach(u => {
+							u = toID(u);
+							const userGames = (UGODB[u] || {});
+							userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+						});
+						Bot.UGO.save();
+					}
+					*/
+					// ENDUGOCODE
 					clearGameTimer(game);
 					delete Bot.rooms[room][gameName][game.id];
 					fs.unlink(`./data/BACKUPS/battleship-${room}-${id}.json`, () => {});
@@ -419,6 +512,17 @@ module.exports = {
 				} else if (!winner || ![game.A.id, game.B.id].includes(winner)) return Bot.roomReply(room, by, `W-who won, again?`);
 				clearGameTimer(game);
 				if (toID(by) === winner) return Bot.roomReply(room, by, 'Only I may be corrupt');
+				if (game.started) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const played = Number(Bot.UGO.get(winner)?.[gameName]);
+						if (played <= pointsLimit) awardUGOPoints(pointsWin, [winner]);
+						awardUGOPoints(pointsLose, [game.A.id === winner ? game.B.id : game.A.id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+					}
+					*/
+					// ENDUGOCODE
+				}
 				runMoves('end', winner === game.A.id ? 'A' : 'B', game);
 				break;
 			}
@@ -433,9 +537,13 @@ module.exports = {
 					const games = files.filter(file => file.startsWith(`battleship-${room}-`)).map(file => file.slice(0, -4)).map(file => file.replace(/[^0-9]/g, ''));
 					if (games.length) {
 						Bot.say(room, `/adduhtml BATTLESHIPBACKUPS, <details><summary>Game Backups</summary><hr />${games.map(game => {
-							const info = require(`../../data/BACKUPS/battleship-${room}-${game}.json`);
-							return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}battleship ${room} restore ${game}">${info.A.name} vs ${info.B.name}</button>`;
-						}).join('<br />')}</details>`);
+							try {
+								const info = require(`../../data/BACKUPS/battleship-${room}-${game}.json`);
+								return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}battleship ${room} restore ${game}">${info.A.name} vs ${info.B.name}</button>`;
+							} catch {
+								return null;
+							}
+						}).filter(Boolean).join('<br/>')}</details>`);
 					} else Bot.say(room, "No backups found.");
 				});
 				break;
@@ -466,11 +574,11 @@ module.exports = {
 				const html = `<hr />${Object.keys(battleship).map(id => {
 					const game = battleship[id];
 					return `${game.A.name ? tools.colourize(game.A.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} join ${id} A">A</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} join ${id} B">B</button>`} ${game.started ? `<button name="send" value ="/msg ${Bot.status.nickName}, ${prefix}battleship ${room} spectate ${id}">Watch</button> ` : ''}(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				const staffHTML = `<hr />${Object.keys(battleship).map(id => {
 					const game = battleship[id];
 					return `${game.A.name ? tools.colourize(game.A.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} join ${id} A">A</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} join ${id} B">B</button>`} ${game.started ? `<button name="send" value ="/msg ${Bot.status.nickName}, ${prefix}battleship ${room} spectate ${id}">Watch</button> ` : ''}<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} end ${id}">End</button> <button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}battleship ${room} stash ${id}">Stash</button>(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				if (isPM === 'export') return [html, staffHTML];
 				if (tools.hasPermission(by, 'gamma', room) && !isPM) {
 					Bot.say(room, `/adduhtml BATTLESHIPMENU,${html}`);
@@ -499,6 +607,15 @@ module.exports = {
 					return game[side].isResigning = true;
 				}
 				clearGameTimer(game);
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const played = Number(Bot.UGO.get(user)?.[gameName]);
+					if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(game[game.other(side)].name)]);
+					awardUGOPoints(pointsLose, [game[side].name].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+				}
+				*/
+				// ENDUGOCODE
 				runMoves('resign', side, game);
 				break;
 			}

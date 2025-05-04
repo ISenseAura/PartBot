@@ -1,6 +1,13 @@
 module.exports = {
 	initialize: () => {
 		Bot.DB = require('origindb')('data/DATA');
+		// UGOCODE
+		/*
+		const tempDB = require('origindb')('data/TEMP');
+		Bot.UGO = tempDB('ugo');
+		Bot.UGO.save = tempDB.save;
+		*/
+		// ENDUGOCODE
 		Bot.userAppeared = function (user) {
 			user = toID(user);
 			const mails = Bot.DB('mails').get(user);
@@ -32,10 +39,10 @@ module.exports = {
 	},
 	join: (by, room, time) => {
 		Bot.userAppeared(by);
+		if (!Bot.jpcool[room]) Bot.jpcool[room] = {};
 		if (!Bot.jps[room] || !Bot.jps[room][by]) return;
 		if (Bot.jpcool[room][by] && (Bot.jpcool[room][by][0] < 10 || time - Bot.jpcool[room][by][1] < 3600000)) return;
 		Bot.say(room, Bot.jps[room][by]);
-		if (!Bot.jpcool[room]) Bot.jpcool[room] = {};
 		Bot.jpcool[room][by] = [0, time];
 		return;
 	},
@@ -108,13 +115,18 @@ module.exports = {
 			}
 		}
 	},
+	uhtml: (room, label, html, isIntro) => {
+		if (isIntro) return;
+		if (label === 'mafia' && room === 'galligallisimsim') {
+			if (/A game of Mafia was created/.test(html)) {
+				Bot.say('hindi', '/wall <<galligallisimsim>> mei ek Mafia ka game shuru hua hai!');
+			}
+		}
+	},
 	line: (room, message, isIntro) => {
 		if (message.charAt(0) === '>' || isIntro) return;
 		if (!Bot.streams[room]) return;
 		const stream = Bot.streams[room];
 		stream.write(`\n${message}`);
 	}
-	/* battle: (...args) => {
-		require('./battle.js').handler(...args);
-	}*/
 };

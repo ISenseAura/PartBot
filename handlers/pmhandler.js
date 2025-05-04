@@ -5,14 +5,10 @@ module.exports = function handler (by, message) {
 			return Bot.joinRooms([message.split('/invite')[1]]);
 		}
 		if (message.startsWith('/invite battle-')) return Bot.joinRooms([message.split('/invite ')[1]]);
-		if (tools.hasPermission(by, 'beta', 'hindi')) return Bot.joinRooms([message.split('/invite ')[1]]);
-		if (['crowmusic', 'premmalhotra', 'rajshoot', 'shivamo', 'thedarkrising'].includes(toID(by))) {
-			return Bot.joinRooms([message.split('/invite ')[1]]);
-		}
 		return Bot.pm(by, "Sorry, only global staff can invite me.");
 	}
 	if (message.startsWith('|requestpage|')) {
-		const [__, reqp, user, title] = message.split('|');
+		const [, reqp, user, title] = message.split('|');
 		if (!title) return;
 		return Bot.pageHandler(by, title);
 	}

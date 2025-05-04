@@ -27,9 +27,8 @@ module.exports = {
 				Bot.log('Unable to send purchase confirmation.', item, by);
 				Bot.pm(by, 'Your purchase has gone through. Please contact PartMan.');
 			}
-			user.points[0] -= item.cost[0];
-			user.points[1] -= item.cost[1];
-			tools.updateLB(room);
+			Bot.rooms[room].points.forEach((_, i) => user.points[i] -= item.cost[i]);
+			tools.updateLB();
 			delete Bot.rooms[room].shop.temp[toID(by)];
 			tools.updateShops(room);
 			return Bot.pm(by, `Your purchase of ${item.name} has been noted! Staff will get back to you soon. <3`);

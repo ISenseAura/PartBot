@@ -129,7 +129,7 @@ module.exports = {
 						return delete Bot.userCallbacks[toID(by)];
 					}
 				}
-				Bot.userCallbackData[toID(by)] = [room];*/
+				Bot.userCallbackData[toID(by)] = [room]; */
 				break;
 			}
 			case 'status': {

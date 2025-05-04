@@ -73,8 +73,8 @@ class Mastermind {
 			const temp = self.guesses.pop();
 			if (temp && temp[4][0] !== null) self.guesses.push(temp);
 			self.guesses.push([...input, [hits.length, close]]);
-			if (hits.length === 4) return resolve(1);
-			if (self.guesses.length >= self.guessLimit) return resolve(2);
+			if (hits.length === 4) return resolve(self.ended = 1);
+			if (self.guesses.length >= self.guessLimit) return resolve(self.ended = 2);
 			return resolve(0);
 		});
 	}
@@ -126,16 +126,16 @@ class Mastermind {
 				if (typeof n[0] !== 'number') return `<div style="width: ${14 * scale}px; display: inline-block;"></div>`;
 				let out = '';
 				// eslint-disable-next-line max-len
-				out += Array.from({ length: n[0] }).map(t => `<div style="width: ${3 * scale}px; height: ${3 * scale}px; background: #E60000; vertical-align: middle; display: inline-block; border-radius: 50%; border: 0.5px solid black; text-align: center; margin-left: margin-right: ${2 * scale}px;"><div style="height: 40%; width: 40%; top: 30%; left: 30%; border-radius: 50%; border: none; background: ${Bot.AFD ? `#B3B3B3` : `#800000`}; position: relative;"></div></div>`).join('');
+				out += Array.from({ length: n[Bot.AFD ? 1 : 0] }).map(t => `<div style="width: ${3 * scale}px; height: ${3 * scale}px; background: #E60000; vertical-align: middle; display: inline-block; border-radius: 50%; border: 0.5px solid black; text-align: center; margin-left: margin-right: ${2 * scale}px;"><div style="height: 40%; width: 40%; top: 30%; left: 30%; border-radius: 50%; border: none; background: #800000; position: relative;"></div></div>`).join('');
 				// eslint-disable-next-line max-len
-				out += Array.from({ length: n[1] }).map(t => `<div style="width: ${3 * scale}px; height: ${3 * scale}px; background: white; vertical-align: middle; display: inline-block; border-radius: 50%; border: 0.5px solid black; text-align: center; margin-left: margin-right: ${2 * scale}px;"><div style="height: 40%; width: 40%; top: 30%; left: 30%; border-radius: 50%; border: none; background: ${Bot.AFD ? `#800000` : `#B3B3B3`}; position: relative;"></div></div>`).join('');
+				out += Array.from({ length: n[Bot.AFD ? 0 : 1] }).map(t => `<div style="width: ${3 * scale}px; height: ${3 * scale}px; background: white; vertical-align: middle; display: inline-block; border-radius: 50%; border: 0.5px solid black; text-align: center; margin-left: margin-right: ${2 * scale}px;"><div style="height: 40%; width: 40%; top: 30%; left: 30%; border-radius: 50%; border: none; background: #B3B3B3; position: relative;"></div></div>`).join('');
 				// eslint-disable-next-line max-len
 				out += Array.from({ length: 4 - n[0] - n[1] }).map(t => `<div style="width: ${3 * scale}px; height: ${3 * scale}px; background: none; vertical-align: middle; display: inline-block; border-radius: 50%; border: none; text-align: center; margin-left: margin-right: ${2 * scale}px;"><div style="height: 40%; width: 40%; top: 30%; left: 30%; border-radius: 50%; border: 1px solid black; background: #4D4D4D; position: relative;"></div></div>`).join('');
 				return out;
 			}).join('%%')}</div>`;
 		}
 		// eslint-disable-next-line max-len
-		html += `</div>${player ? `<div style="border:1px solid;padding:20px;display:inline-block;vertical-align:top;"><form data-submitsend="/msgroom ${this.room},/botmsg ${Bot.status.nickName},${prefix}mastermind ${this.room} guess {guess}"><input type="text" name="guess" placeholder="Your guess!"/><br/><br/><center><input type="submit" value="Submit"></center></form></div>` : ''}</div>`;
+		html += `</div>${player ? `<div style="border:1px solid;padding:20px;display:inline-block;vertical-align:top;">${this.ended ? `<button name="send" value="/msgroom ${this.room},/botmsg ${Bot.status.nickName},${prefix}mastermind ${this.room} n ${this.guessLimit}">Play Again</button>` : `<form data-submitsend="/msgroom ${this.room},/botmsg ${Bot.status.nickName},${prefix}mastermind ${this.room} guess {guess}"><input type="text" name="guess" placeholder="Your guess!"/><br/><br/><center><input type="submit" value="Submit"></center></form>`}</div>` : ''}</div>`;
 		return html;
 	}
 	sendPages (onlyPlayer) {

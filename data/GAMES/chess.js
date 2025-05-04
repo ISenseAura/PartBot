@@ -60,7 +60,7 @@ class Chess {
 			BP: '<div style="font-size:25px; color: black;">♟</div>'
 		};
 		this.src = null;
-		this.colours = JSON.parse(fs.readFileSync('./data/DATA/chess_themes.json', 'utf8'))[Bot.AFD ? 'wario' : 'spooky'];
+		this.colours = JSON.parse(fs.readFileSync('./data/DATA/chess_themes.json', 'utf8'))[Bot.AFD ? 'wario' : 'ii'];
 		this.spectators = {};
 	}
 
@@ -861,7 +861,7 @@ class Chess {
 	}
 
 	static uploadToLichess (text, callback) {
-		return axios.post('https://lichess.org/api/import', { pgn: text }).then(res => res.data.url);
+		return axios.post('https://lichess.org/api/import', { pgn: text }, { headers: { Accept: 'application/json' } }).then(res => res.data.url);
 	}
 }
 

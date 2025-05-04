@@ -99,9 +99,12 @@ module.exports = {
 						return respond(amt);
 					}
 				} else {
-					const found = quotes.map((q, i) => [q.toLowerCase().includes(search), q, i]).filter(f => f[0]);
-					if (found.length === 1) index = found[0][2];
-					else return respond(`Found multiple matching quotes! [${found.map(n => n[2] + 1).join(', ')}]`);
+					if (toID(search) === 'last' || toID(search) === 'z') index = quotes.length - 1;
+					else {
+						const found = quotes.map((q, i) => [q.toLowerCase().includes(search), q, i]).filter(f => f[0]);
+						if (found.length === 1) index = found[0][2];
+						else return respond(`Found multiple matching quotes! [${found.map(n => n[2] + 1).join(', ')}]`);
+					}
 				}
 				const tbd = quotes[index];
 				quotes.splice(index, 1);

@@ -30,7 +30,9 @@
 		"no-tabs": 0,
 		"no-trailing-spaces": "error",
 		"no-unreachable": 2,
-		"no-unused-expressions": "error",
+		"no-unused-expressions": ["error", {
+			"allowShortCircuit": true
+		}],
 		"no-var": "error",
 		"object-curly-spacing": ["error", "always"],
 		"prefer-const": ["error", {
@@ -47,7 +49,11 @@
 		"space-in-parens": "error",
 		"space-infix-ops": "error",
 		"spaced-comment": ["error", "always", {
-			"exceptions": ["*", "open", "close"]
+			"block": {
+				"balanced": true,
+				"exceptions": ["*", "open", "close"],
+				"markers": ["alt"]
+			}
 		}],
 		"yoda": ["error", "never"]
 	}

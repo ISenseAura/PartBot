@@ -11,6 +11,7 @@ module.exports = function (room, time, by, message) {
 	const commandName = tools.commandAlias(args.shift().toLowerCase());
 	if (!commandName) return;
 	if (['eval', 'output'].includes(commandName)) {
+		// TODO: Scope this to root
 		if (!tools.hasPermission(toID(by), 'admin')) return Bot.pm(by, 'Access denied.');
 		(async () => {
 			try {

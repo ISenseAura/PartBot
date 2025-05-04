@@ -22,7 +22,7 @@ module.exports = {
 						temp.push(`${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/msg ${Bot.status.nickName}, ${prefix}chess ${room} join ${game.id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/msg ${Bot.status.nickName}, ${prefix}chess ${room} join ${game.id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/msg ${Bot.status.nickName}, ${prefix}chess ${room} spectate ${game.id}">Watch</button> ` : ''}(#${game.id})`);
 					});
 					if (!avb) return games.push(`Chess (0)`);
-					games.push(`<details><summary>Chess (${avb}/${count})</summary>${temp.join('<br />')}</details>`);
+					games.push(`<details><summary>Chess (${avb}/${count})</summary>${temp.join('<br/>')}</details>`);
 					break;
 				}
 				case 'CR': {
@@ -41,7 +41,7 @@ module.exports = {
 						temp.push(`${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/msg ${Bot.status.nickName}, ${prefix}othello ${room} join ${game.id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/msg ${Bot.status.nickName}, ${prefix}othello ${room} join ${game.id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/msg ${Bot.status.nickName}, ${prefix}othello ${room} spectate ${game.id}">Watch</button> ` : ''}(#${game.id})`);
 					});
 					if (!avb) return games.push(`Othello (0)`);
-					games.push(`<details><summary>Othello (${avb}/${count})</summary>${temp.join('<br />')}</details>`);
+					games.push(`<details><summary>Othello (${avb}/${count})</summary>${temp.join('<br/>')}</details>`);
 					break;
 				}
 				case 'lightsout': {

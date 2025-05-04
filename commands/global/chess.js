@@ -1,3 +1,14 @@
+// UGOCODE
+/*
+const gameLimit = 1000;
+const pointsLimit = 20;
+const gameName = 'chess';
+const gameTitle = 'Chess';
+const pointsWin = 24;
+const pointsDraw = 18;
+const pointsLose = 15;
+*/
+
 function sendEmbed (room, W, B, pgn) {
 	const CHESS = GAMES.get('chess');
 	CHESS.uploadToLichess(pgn).then(url => {
@@ -10,6 +21,9 @@ function sendEmbed (room, W, B, pgn) {
 			Bot.say(room, 'Unable to send ' + url + ' to the Discord because ' + e.message);
 			Bot.log(e);
 		});
+	}).catch(err => {
+		Bot.log(err);
+		tools.uploadToPastie(pgn).then(u => Bot.say(room, `Err, couldn't upload to Lichess; take ${u} instead.`));
 	});
 }
 
@@ -56,7 +70,7 @@ function runMoves (run, info, game) {
 		}
 		case 2: {
 			// Promotion
-			Bot.say(room, `/sendhtmlpage ${game[game.turn].id}, Chess + ${room} + ${id}, <center><h1 style="text-align: center;">Promotion Time!</h1>${game.boardHTML(game.turn)}</center><br /><center><br /><button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Queen">Queen</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Rook">Rook</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Bishop">Bishop</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Knight">Knight</button></center>`);
+			Bot.say(room, `/sendhtmlpage ${game[game.turn].id}, Chess + ${room} + ${id}, <center><h1 style="text-align: center;">Promotion Time!</h1>${game.boardHTML(game.turn)}</center><br/><center><br/><button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Queen">Queen</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Rook">Rook</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Bishop">Bishop</button> <button name="send" value="/msgroom ${room},/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} promote ${id} ${info} Knight">Knight</button></center>`);
 			setTimeout(() => {
 				Bot.say(room, `/highlighthtmlpage ${game[game.turn].id}, Chess + ${room} + ${id}, Your turn!`);
 			}, 1000);
@@ -68,6 +82,15 @@ function runMoves (run, info, game) {
 			game.result = game.turn == 'B' ? '1-0' : '0-1';
 			if (!moves) moves = [];
 			const W = game.W.name, B = game.B.name, pgn = CHESS.toPGN(game);
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				const played = Number(Bot.UGO.get(game.turn === 'B' ? game.W.id : game.B.id)?.[gameName]);
+				if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(game.turn === 'B' ? W : B)]);
+				awardUGOPoints(pointsLose, [game[game.turn].id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+			}
+			*/
+			// ENDUGOCODE
 			fs.unlink(`./data/BACKUPS/chess-${room}-${id}.json`, e => {});
 			game.switchSides();
 			Bot.say(room, `/adduhtml CHESS-${Date.now()},<center>${game.boardHTML(game.turn)}</center>`);
@@ -87,6 +110,13 @@ function runMoves (run, info, game) {
 			if (!moves) moves = [];
 			moves.push('END');
 			const W = game.W.name, B = game.B.name, pgn = CHESS.toPGN(game);
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				awardUGOPoints(pointsDraw, [game.W.id, game.B.id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+			}
+			*/
+			// ENDUGOCODE
 			fs.unlink(`./data/BACKUPS/chess-${room}-${id}.json`, e => {});
 			Bot.say(room, `/adduhtml CHESS-${Date.now()},<center>${game.boardHTML(game.turn)}</center>`);
 			game.spectatorSend(`<center><h1>Stalemate</h1>${game.boardHTML()}</center>`);
@@ -105,6 +135,21 @@ function runMoves (run, info, game) {
 			if (!moves) moves = [];
 			moves.push('END');
 			const W = game.W.name, B = game.B.name, pgn = CHESS.toPGN(game);
+			// UGOCODE
+			/*
+			if (info !== null) {
+				if (UGOR(room)) {
+					if (game[info]) {
+						const played = Number(Bot.UGO.get(game[info].id)?.[gameName]);
+						if (played <= pointsLimit) awardUGOPoints(pointsWin, [toID(game[info].id)]);
+						awardUGOPoints(pointsLose, [game[info === 'W' ? 'B' : 'W'].id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+					} else {
+						awardUGOPoints(pointsDraw, [game.W.id, game.B.id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+					}
+				}
+			}
+			*/
+			// ENDUGOCODE
 			fs.unlink(`./data/BACKUPS/chess-${room}-${id}.json`, e => {});
 			Bot.say(room, `/adduhtml CHESS-${Date.now()},<center>${game.boardHTML(game.turn)}</center>`);
 			game.spectatorSend(`<center><h1>Game Ended.</h1>${game.boardHTML()}</center>`);
@@ -127,6 +172,15 @@ function runMoves (run, info, game) {
 			if (!moves) moves = [];
 			moves.push("RESIGN");
 			const W = game.W.name, B = game.B.name, pgn = CHESS.toPGN(game);
+			// UGOCODE
+			/*
+			if (UGOR(room)) {
+				const played = Number(Bot.UGO.get(game[side === 'W' ? 'B' : 'W'].id)?.[gameName]);
+				if (played <= pointsLimit) awardUGOPoints(pointsWin, [game[side === 'W' ? 'B' : 'W'].id]);
+				awardUGOPoints(pointsLose, [game[side].id].filter(p => Number(Bot.UGO.get(toID(p))?.[gameName]) <= pointsLimit));
+			}
+			*/
+			// ENDUGOCODE
 			delete Bot.rooms[room].chess[id];
 			fs.unlink(`./data/BACKUPS/chess-${room}-${id}.json`, e => {});
 			Bot.say(room, 'Game ended!');
@@ -160,7 +214,7 @@ module.exports = {
 				const id = Date.now();
 				Bot.rooms[room].chess[id] = GAMES.create('chess', id, room);
 				Bot.say(room, `/adduhtml CHESS-${id}, <hr/><h1>Chess Signups have begun!</h1><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room}, join ${id} White">White</button><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room}, join ${id} Black">Black</button><button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room}, join ${id} Random">Random</button><hr/>`);
-				Bot.say(room, '/notifyrank all, Chess, A new game of chess has been created!, A new game of chess has been created.');
+				Bot.say(room, '/notifyrank all, Chess, A new game of chess has been created!,chesssignup');
 				return;
 				break;
 			}
@@ -203,6 +257,24 @@ module.exports = {
 				if (game[side].id) return Bot.roomReply(room, by, "Sorry, already taken!");
 				const other = side === 'W' ? 'B' : 'W';
 				if (game[other].id === user) return Bot.roomReply(room, by, "~~You couldn't find anyone else to fight you? __Really__?~~");
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`);
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+				}
+				*/
+				// ENDUGOCODE
 				Bot.say(room, `${by.substr(1)} joined Chess (#${id}) as ${side === 'W' ? 'White' : 'Black'}!${rand ? ' (random)' : ''}`);
 				runMoves('join', { user: by.substr(1), side: side }, game);
 				break;
@@ -348,7 +420,35 @@ module.exports = {
 				cargs = cargs.map(carg => carg.trim());
 				const users = cargs.map(carg => toID(carg));
 				if (users.includes(game.W.id) && users.includes(game.B.id) || !users.includes(game.W.id) && !users.includes(game.B.id)) return Bot.say(room, 'Those users? Something\'s wrong with those...');
-				if ([game.W.id, game.B.id].includes(toID(by)) && !tools.hasPermission(by, 'coder')) return Bot.say(room, "Hah! Can't sub yourself out.");
+				if ([game.W.id, game.B.id].includes(toID(by)) && !tools.hasPermission(by, 'coder')) return Bot.say(room, "Hah! Can't sub yourself out."); // UGOCODE beta -> coder
+				// UGOCODE
+				/*
+				if (UGOR(room)) {
+					const coming = users.find(u => ![game.W.id, game.B.id].includes(u)), going = users.find(u => [game.W.id, game.B.id].includes(u));
+					const user = coming;
+					const userGames = Bot.UGO.object()[user];
+					const played = Number(userGames?.[gameName]) || 0;
+					if (played >= gameLimit) return Bot.say(room, `[[ ]]${user} has already played ${played} games of ${gameTitle} today and reached the maximum! The count resets at midnight UTC every day.`)
+					if (played >= pointsLimit) Bot.roomReply(room, by, `You have already played ${played} games of ${gameTitle} today! While you can still continue to play, UGO points will not be counted for this and future games. The count resets at midnight UTC every day.`);
+					if (!userGames) {
+						const points = {};
+						points[gameName] = 1;
+						Bot.UGO.set(user, points);
+					} else {
+						userGames[gameName] = played + 1;
+						Bot.UGO.save();
+					}
+					const lusers = [going];
+					const UGODB = Bot.UGO.object();
+					lusers.forEach(u => {
+						u = toID(u);
+						const userGames = (UGODB[u] || {});
+						userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+					});
+					Bot.UGO.save();
+				}
+				*/
+				// ENDUGOCODE
 				let ex, add;
 				if (users.includes(game.W.id)) {
 					if (users[0] == game.W.id) {
@@ -404,6 +504,20 @@ module.exports = {
 				const game = Bot.rooms[room].chess[id];
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				if (!game.started) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const users = [game.W.id, game.B.id].filter(t => t);
+						const UGODB = Bot.UGO.object();
+						users.forEach(u => {
+							u = toID(u);
+							const userGames = (UGODB[u] || {});
+							userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+						});
+						Bot.UGO.save();
+					}
+					*/
+					// ENDUGOCODE
 					delete Bot.rooms[room].chess[id];
 					Bot.say(room, `/changeuhtml CHESS-${id}, Ended. :(`);
 					return Bot.say(room, `Welp, ended Chess#${id}.`);
@@ -422,6 +536,20 @@ module.exports = {
 				if (!game) return Bot.roomReply(room, by, "Invalid ID.");
 				if (winner !== 'none' && ![game.W.id, game.B.id].includes(winner)) return Bot.roomReply(room, by, `${winner} was not a valid winner (name or 'none')`);
 				if (!game.started) {
+					// UGOCODE
+					/*
+					if (UGOR(room)) {
+						const users = [game.W.id, game.B.id].filter(t => t);
+						const UGODB = Bot.UGO.object();
+						users.forEach(u => {
+							u = toID(u);
+							const userGames = (UGODB[u] || {});
+							userGames[gameName] = userGames[gameName] ? userGames[gameName] - 1 : 0;
+						});
+						Bot.UGO.save();
+					}
+					*/
+					// ENDUGOCODE
 					delete Bot.rooms[room].chess[id];
 					Bot.say(room, `/changeuhtml CHESS-${id}, Ended. :(`);
 					return Bot.say(room, `Welp, ended Chess#${id}.`);
@@ -465,9 +593,13 @@ module.exports = {
 					const games = files.filter(file => file.startsWith(`chess-${room}-`)).map(file => file.slice(0, -4)).map(file => file.replace(/[^0-9]/g, ''));
 					if (games.length) {
 						Bot.say(room, `/adduhtml CHESSBACKUPS, <details><summary>Game Backups</summary><hr />${games.map(game => {
-							const info = require(`../../data/BACKUPS/chess-${room}-${game}.json`);
-							return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}chess ${room} restore ${game}">${info.W.name} vs ${info.B.name}</button>`;
-						}).join('<br />')}</details>`);
+							try {
+								const info = require(`../../data/BACKUPS/chess-${room}-${game}.json`);
+								return `<button name="send" value="/botmsg ${Bot.status.nickName},${prefix}chess ${room} restore ${game}">${info.W.name} vs ${info.B.name}</button>`;
+							} catch {
+								return null;
+							}
+						}).filter(Boolean).join('<br/>')}</details>`);
 					} else Bot.say(room, "No backups found.");
 				});
 				break;
@@ -566,11 +698,11 @@ module.exports = {
 				const html = `<hr />${Object.keys(chess).map(id => {
 					const game = chess[id];
 					return `${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} join ${id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} join ${id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} spectate ${id}">Watch</button> ` : ''}(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				const staffHTML = `<hr />${Object.keys(chess).map(id => {
 					const game = chess[id];
 					return `${game.W.name ? tools.colourize(game.W.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} join ${id} White">White</button>`} vs ${game.B.name ? tools.colourize(game.B.name) : `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} join ${id} Black">Black</button>`} ${game.started ? `<button name="send" value ="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} spectate ${id}">Watch</button> ` : ''}${tools.hasPermission(by, 'gamma', room) ? `<button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} end ${id}">End</button> <button name="send" value="/botmsg ${Bot.status.nickName}, ${prefix}chess ${room} stash ${id}">Stash</button>` : ''}(#${id})`;
-				}).join('<br />')}<hr />`;
+				}).join('<br/>')}<hr />`;
 				if (isPM === 'export') return [html, staffHTML];
 				if (tools.hasPermission(by, 'gamma', room) && !isPM) {
 					Bot.say(room, `/adduhtml CHESSMENU,${html}`);

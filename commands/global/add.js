@@ -22,7 +22,7 @@ module.exports = {
 			}
 		}
 		if (!flag) points = 1;
-		Promise.all(users.map(user => tools.addPoints(type, user, points, room))).then(res => {
+		tools.addPoints(type, Object.fromEntries(users.map(user => [user, points])), room, by).then(res => {
 			const list = tools.listify(res);
 			Bot.say(room, `${points} ${points === 1 ? cur[0] : cur[1]} ${points === 1 ? 'was' : 'were'} awarded to ${list}.`);
 		}).catch(e => {
