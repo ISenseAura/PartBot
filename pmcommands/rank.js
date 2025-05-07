@@ -26,11 +26,9 @@ module.exports = {
     const usernameToFind = cargs[1] || toID(by.name);
     const rank = data.findIndex((entry) => entry[0] === usernameToFind);
     if (rank !== -1) {
-      Bot.pm(by, `${usernameToFind} is ranked ${rank + 1} with ${lb.users[usernameToFind].points} points on ${room} room leaderboard`);
+      return Bot.pm(by, `${usernameToFind} is ranked ${rank + 1} with ${lb.users[usernameToFind].points} points on ${room} room leaderboard`);
     } else {
-      Bot.pm(by, `${usernameToFind} not found on ${room} room leaderboard`);
+      return Bot.pm(by, `${usernameToFind} not found on ${room} room leaderboard`);
     }
-    if (typeof html !== "string") return Bot.pm(by, "Something went wrong.");
-    return Bot.sendHTML(by, "<center>" + html + "</center>");
   },
 };
